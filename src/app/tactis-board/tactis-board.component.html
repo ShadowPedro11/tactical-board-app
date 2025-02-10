@@ -1,54 +1,56 @@
 <div class="selectors">
-    <div class="selector">
-      <label for="formationA">Team A Formation:</label>
-      <select id="formationA" (change)="selectFormation('A', $any($event.target).selectedIndex)">
-        <option *ngFor="let formation of formations">{{ formation.name }}</option>
-      </select>
-    </div>
-    <div class="selector">
-      <label for="formationB">Team B Formation:</label>
-      <select id="formationB" (change)="selectFormation('B', $any($event.target).selectedIndex)">
-        <option *ngFor="let formation of formations">{{ formation.name }}</option>
-      </select>
+  <div class="selector">
+    <label for="formationA">Team A Formation:</label>
+    <select id="formationA" (change)="selectFormation('A', $any($event.target).selectedIndex)">
+      <option *ngFor="let formation of formations">{{ formation.name }}</option>
+    </select>
+  </div>
+  <div class="selector">
+    <label for="formationB">Team B Formation:</label>
+    <select id="formationB" (change)="selectFormation('B', $any($event.target).selectedIndex)">
+      <option *ngFor="let formation of formations">{{ formation.name }}</option>
+    </select>
+  </div>
+</div>
+
+<!-- Field container with a template reference variable -->
+<div #container class="container"
+     (mousemove)="onFieldMouseMove($event)"
+     (mouseup)="onFieldMouseUp($event)"
+     (mouseleave)="onFieldMouseUp($event)">
+  <div class="line"></div>
+  <div class="half"></div>
+  <div class="panelty left"></div>
+  <div class="panelty right"></div>
+  <div class="p-spot left">&nbsp;</div>
+  <div class="p-spot right">&nbsp;</div>
+  <div class="center"></div>
+  <div class="p-place left"></div>
+  <div class="p-place right"></div>
+
+  <!-- Render tokens for Team A -->
+  <div *ngFor="let token of teamATokens"
+       class="token token-a"
+       [style.left.%]="token.x"
+       [style.top.%]="token.y"
+       (mousedown)="onTokenMouseDown(token, $event)"
+       (contextmenu)="onTokenRightClick(token, $event)">
+    <div class="token-content">
+      <span class="token-number">{{ token.number }}</span>
+      <span class="token-name">{{ token.name }}</span>
     </div>
   </div>
-  
-  <!-- Field container: clicking here moves a selected token -->
-  <div class="container" (click)="onFieldClick($event)">
-    <div class="line"></div>
-    <div class="half"></div>
-    <div class="panelty left"></div>
-    <div class="panelty right"></div>
-    <div class="p-spot left">&nbsp;</div>
-    <div class="p-spot right">&nbsp;</div>
-    <div class="center"></div>
-    <div class="p-place left"></div>
-    <div class="p-place right"></div>
-  
-    <!-- Render tokens for Team A -->
-    <div *ngFor="let token of teamATokens"
-         class="token token-a"
-         [style.left.%]="token.x"
-         [style.top.%]="token.y"
-         (click)="onTokenLeftClick(token, $event)"
-         (contextmenu)="onTokenRightClick(token, $event)">
-      <div class="token-content">
-        <span class="token-number">{{ token.number }}</span>
-        <span class="token-name">{{ token.name }}</span>
-      </div>
-    </div>
-  
-    <!-- Render tokens for Team B -->
-    <div *ngFor="let token of teamBTokens"
-         class="token token-b"
-         [style.left.%]="token.x"
-         [style.top.%]="token.y"
-         (click)="onTokenLeftClick(token, $event)"
-         (contextmenu)="onTokenRightClick(token, $event)">
-      <div class="token-content">
-        <span class="token-number">{{ token.number }}</span>
-        <span class="token-name">{{ token.name }}</span>
-      </div>
+
+  <!-- Render tokens for Team B -->
+  <div *ngFor="let token of teamBTokens"
+       class="token token-b"
+       [style.left.%]="token.x"
+       [style.top.%]="token.y"
+       (mousedown)="onTokenMouseDown(token, $event)"
+       (contextmenu)="onTokenRightClick(token, $event)">
+    <div class="token-content">
+      <span class="token-number">{{ token.number }}</span>
+      <span class="token-name">{{ token.name }}</span>
     </div>
   </div>
-  
+</div>
