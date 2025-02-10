@@ -1,56 +1,89 @@
-<div class="selectors">
-  <div class="selector">
-    <label for="formationA">Team A Formation:</label>
-    <select id="formationA" (change)="selectFormation('A', $any($event.target).selectedIndex)">
-      <option *ngFor="let formation of formations">{{ formation.name }}</option>
-    </select>
-  </div>
-  <div class="selector">
-    <label for="formationB">Team B Formation:</label>
-    <select id="formationB" (change)="selectFormation('B', $any($event.target).selectedIndex)">
-      <option *ngFor="let formation of formations">{{ formation.name }}</option>
-    </select>
-  </div>
-</div>
-
-<!-- Field container with a template reference variable -->
-<div #container class="container"
-     (mousemove)="onFieldMouseMove($event)"
-     (mouseup)="onFieldMouseUp($event)"
-     (mouseleave)="onFieldMouseUp($event)">
-  <div class="line"></div>
-  <div class="half"></div>
-  <div class="panelty left"></div>
-  <div class="panelty right"></div>
-  <div class="p-spot left">&nbsp;</div>
-  <div class="p-spot right">&nbsp;</div>
-  <div class="center"></div>
-  <div class="p-place left"></div>
-  <div class="p-place right"></div>
-
-  <!-- Render tokens for Team A -->
-  <div *ngFor="let token of teamATokens"
-       class="token token-a"
-       [style.left.%]="token.x"
-       [style.top.%]="token.y"
-       (mousedown)="onTokenMouseDown(token, $event)"
-       (contextmenu)="onTokenRightClick(token, $event)">
-    <div class="token-content">
-      <span class="token-number">{{ token.number }}</span>
-      <span class="token-name">{{ token.name }}</span>
+<div class="layout">
+  <div class="header">
+    <div class="team-selector blue">
+      <label for="teamSelect">Select Team:</label>
+      <select id="teamSelect" (change)="onTeamSelect($any($event.target).value)">
+        <option value="">-- Select a Team --</option>
+        <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
+      </select>
+    </div>
+    <div class="formation-selectors purple">
+      <div class="selector">
+        <label for="formationA">Team A Formation:</label>
+        <select id="formationA" (change)="selectFormation('A', $any($event.target).selectedIndex)">
+          <option *ngFor="let formation of formations">{{ formation.name }}</option>
+        </select>
+      </div>
+      <div class="selector">
+        <label for="formationB">Team B Formation:</label>
+        <select id="formationB" (change)="selectFormation('B', $any($event.target).selectedIndex)">
+          <option *ngFor="let formation of formations">{{ formation.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="team-selector blue">
+      <label for="teamSelect">Select Team:</label>
+      <select id="teamSelect" (change)="onTeamSelect($any($event.target).value)">
+        <option value="">-- Select a Team --</option>
+        <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
+      </select>
     </div>
   </div>
 
-  <!-- Render tokens for Team B -->
-  <div *ngFor="let token of teamBTokens"
-       class="token token-b"
-       [style.left.%]="token.x"
-       [style.top.%]="token.y"
-       (mousedown)="onTokenMouseDown(token, $event)"
-       (contextmenu)="onTokenRightClick(token, $event)">
-    <div class="token-content">
-      <span class="token-number">{{ token.number }}</span>
-      <span class="token-name">{{ token.name }}</span>
+  <!-- Main area: red team pictures on sides with the green field in the center -->
+  <div class="main">
+    <div class="team-picture red">
+      <!-- Replace with your Team A picture -->
+      <img src="assets/teamA.jpg" alt="Team A" />
+    </div>
+    <div class="field-container green">
+      <!-- The existing field container (green) -->
+      <!-- Added template reference and new drag/drop event bindings -->
+      <div #container class="container"
+           (mousemove)="onFieldMouseMove($event)"
+           (mouseup)="onFieldMouseUp($event)"
+           (mouseleave)="onFieldMouseUp($event)"
+           (click)="onFieldClick($event)">
+        <div class="line"></div>
+        <div class="half"></div>
+        <div class="panelty left"></div>
+        <div class="panelty right"></div>
+        <div class="p-spot left">&nbsp;</div>
+        <div class="p-spot right">&nbsp;</div>
+        <div class="center"></div>
+        <div class="p-place left"></div>
+        <div class="p-place right"></div>
+
+        <!-- Render tokens for Team A -->
+        <div *ngFor="let token of teamATokens"
+             class="token token-a"
+             [style.left.%]="token.x"
+             [style.top.%]="token.y"
+             (mousedown)="onTokenMouseDown(token, $event)"
+             (contextmenu)="onTokenRightClick(token, $event)">
+          <div class="token-content">
+            <span class="token-number">{{ token.number }}</span>
+            <span class="token-name">{{ token.name }}</span>
+          </div>
+        </div>
+
+        <!-- Render tokens for Team B -->
+        <div *ngFor="let token of teamBTokens"
+             class="token token-b"
+             [style.left.%]="token.x"
+             [style.top.%]="token.y"
+             (mousedown)="onTokenMouseDown(token, $event)"
+             (contextmenu)="onTokenRightClick(token, $event)">
+          <div class="token-content">
+            <span class="token-number">{{ token.number }}</span>
+            <span class="token-name">{{ token.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="team-picture red">
+      <!-- Replace with your Team B picture -->
+      <img src="assets/teamB.jpg" alt="Team B" />
     </div>
   </div>
 </div>

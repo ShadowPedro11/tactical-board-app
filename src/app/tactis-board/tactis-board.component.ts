@@ -1,5 +1,6 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Team, TeamService } from './team.service';
 import { formations } from './formations';
 
 interface PlayerToken {
@@ -23,13 +24,15 @@ interface Formation {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './tactis-board.component.html',
-  styleUrls: ['./tactis-board.component.css'] // Note the plural "styleUrls"
+  styleUrls: ['./tactis-board.component.css']
 })
-export class TactisBoardComponent {
-  // Get a reference to the field container (make sure your template uses #container)
-  @ViewChild('container', { static: true }) fieldContainer!: ElementRef<HTMLElement>;
+export class TactisBoardComponent implements OnInit {
+  // Reference to the field container (make sure your HTML container has #container)
+  @ViewChild('container', { static: true }) container!: ElementRef<HTMLElement>;
 
   formations = formations;
+  teams: Team[] = [];
+  selectedTeam: Team | null = null;
 
   selectedFormationA: Formation | null = null;
   selectedFormationB: Formation | null = null;
@@ -37,12 +40,22 @@ export class TactisBoardComponent {
   teamATokens: PlayerToken[] = [];
   teamBTokens: PlayerToken[] = [];
 
-  // Properties for drag-and-drop
+  // For drag-and-drop:
   draggingToken: PlayerToken | null = null;
   dragOffsetX: number = 0;
   dragOffsetY: number = 0;
 
-  // When a formation is selected, convert the fixed pixel positions to percentages.
+  constructor(private teamService: TeamService) {}
+
+  ngOnInit(): void {
+    // Fetch teams from the external API
+    this.teamService.getTeams().subscribe({
+      next: (data) => (this.teams = data),
+      error: (err) => console.error('Error fetching teams:', err)
+    });
+  }
+
+  // Called when a formation is selected.
   selectFormation(team: 'A' | 'B', formationIndex: number): void {
     const formation = this.formations[formationIndex];
     if (team === 'A') {
@@ -50,18 +63,17 @@ export class TactisBoardComponent {
       this.teamATokens = formation.positions.map((pos, index) => ({
         id: index,
         team: 'A',
-        x: (pos.x / 850) * 100, // convert to percentage
+        x: (pos.x / 850) * 100,
         y: (pos.y / 550) * 100,
         number: '',
         name: ''
       }));
     } else {
       this.selectedFormationB = formation;
-      // For Team B, mirror the positions (adjust the x coordinate).
       this.teamBTokens = formation.positions.map((pos, index) => ({
         id: index,
         team: 'B',
-        x: 95.5 - ((pos.x / 850) * 100), // Adjusted mirror formula (modify as needed)
+        x: 95.5 - ((pos.x / 850) * 100),
         y: (pos.y / 550) * 100,
         number: '',
         name: ''
@@ -69,39 +81,66 @@ export class TactisBoardComponent {
     }
   }
 
-  // Called when the user presses the left mouse button on a token.
+  // Handle team selection from a dropdown.
+  onTeamSelect(event: any): void {
+    const teamId = +event.target.value;
+    this.selectedTeam = this.teams.find(team => team.id === teamId) || null;
+    console.log('Selected team:', this.selectedTeam);
+  }
+
+  // ---------------------------
+  // DRAG & DROP IMPLEMENTATION
+  // ---------------------------
+
+  // Called when a token is pressed (left mouse button) to start dragging.
   onTokenMouseDown(token: PlayerToken, event: MouseEvent): void {
-    if (event.button !== 0) return; // Only proceed if it's the left button.
+    if (event.button !== 0) return; // Only react to left-button
     event.stopPropagation();
-    const containerRect = this.fieldContainer.nativeElement.getBoundingClientRect();
-    // Calculate the token's current pixel position based on its percentage.
+    // Get the container's bounding rectangle.
+    const containerRect = this.container.nativeElement.getBoundingClientRect();
+    // Calculate token's current pixel position based on its percentage.
     const tokenPixelX = (token.x / 100) * containerRect.width;
     const tokenPixelY = (token.y / 100) * containerRect.height;
-    // Record the offset between the mouse pointer and the token's top-left corner.
+    // Calculate the offset from the mouse position to the token's top-left corner.
     this.dragOffsetX = event.clientX - (containerRect.left + tokenPixelX);
     this.dragOffsetY = event.clientY - (containerRect.top + tokenPixelY);
     this.draggingToken = token;
   }
 
-  // Called on mousemove over the field container to update the token position.
+  // Called as the mouse moves over the field container.
   onFieldMouseMove(event: MouseEvent): void {
     if (!this.draggingToken) return;
-    const containerRect = this.fieldContainer.nativeElement.getBoundingClientRect();
+    const containerRect = this.container.nativeElement.getBoundingClientRect();
+    // Calculate new pixel coordinates for the token's top-left corner.
     const newPixelX = event.clientX - containerRect.left - this.dragOffsetX;
     const newPixelY = event.clientY - containerRect.top - this.dragOffsetY;
-    // Update the token's position in percentages.
+    // Update token position in percentages.
     this.draggingToken.x = (newPixelX / containerRect.width) * 100;
     this.draggingToken.y = (newPixelY / containerRect.height) * 100;
   }
 
-  // Called on mouseup (or when leaving the container) to end dragging.
+  // Called on mouseup or when the mouse leaves the container to end dragging.
   onFieldMouseUp(event: MouseEvent): void {
     this.draggingToken = null;
   }
 
+  // ---------------------------
+  // END DRAG & DROP IMPLEMENTATION
+  // ---------------------------
+
+  // (Optional) If the user clicks on the field and a token is selected, update its position.
+  onFieldClick(event: MouseEvent): void {
+    if (this.draggingToken) return; // Ignore if dragging is in progress.
+    const field = event.currentTarget as HTMLElement;
+    const rect = field.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const clickY = event.clientY - rect.top;
+    // (Optional) Update the token position if desired.
+  }
+
   // Right-click on a token to edit its number and name.
   onTokenRightClick(token: PlayerToken, event: MouseEvent): void {
-    event.preventDefault(); // Prevent the context menu.
+    event.preventDefault();
     event.stopPropagation();
     const newNumber = prompt("Enter player's number:", token.number || '');
     if (newNumber !== null) {
