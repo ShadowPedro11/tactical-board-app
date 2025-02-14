@@ -23,7 +23,7 @@ export interface Uniform {
       //{ id: 2, name: 'Away', colors: ['#FFFFFF'], type: 'single' },
       //{ id: 3, name: 'Third', colors: ['#FF5A00', '#000000'], type: 'vertical' }
     ],
-    216: [ // Portimonense
+    225: [ // Nacional
       //{ id: 1, name: 'Home', colors: ['#8B0000'], type: 'single' },
       //{ id: 2, name: 'Away', colors: ['#FFFFFF'], type: 'single' },
       //{ id: 3, name: 'Third', colors: ['#8B0000', '#000000'], type: 'vertical' }
@@ -38,7 +38,7 @@ export interface Uniform {
       //{ id: 2, name: 'Away', colors: ['#FFFFFF'], type: 'single' },
       //{ id: 3, name: 'Third', colors: ['#000000', '#808080'], type: 'vertical' }
     ],
-    223: [ // Chaves
+    227: [ // Santa Clara
       //{ id: 1, name: 'Home', colors: ['#FFD700'], type: 'single' },
       //{ id: 2, name: 'Away', colors: ['#FFFFFF'], type: 'single' },
       //{ id: 3, name: 'Third', colors: ['#FFD700', '#000000'], type: 'vertical' }
@@ -82,11 +82,6 @@ export interface Uniform {
       //{ id: 1, name: 'Home', colors: ['#800080'], type: 'single' },
       //{ id: 2, name: 'Away', colors: ['#FFFFFF'], type: 'single' },
       //{ id: 3, name: 'Third', colors: ['#800080', '#FFFFFF'], type: 'vertical' }
-    ],
-    810: [ // Vizela
-      //{ id: 1, name: 'Home', colors: ['#FF0000'], type: 'single' },
-      //{ id: 2, name: 'Away', colors: ['#FFFFFF'], type: 'single' },
-      //{ id: 3, name: 'Third', colors: ['#FF0000', '#FFFFFF'], type: 'vertical' }
     ],
     4716: [ // Casa Pia
       //{ id: 1, name: 'Home', colors: ['#4169E1'], type: 'single' },

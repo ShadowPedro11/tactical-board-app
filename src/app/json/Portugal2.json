@@ -1,0 +1,416 @@
+{
+    "get": "teams",
+    "parameters": {
+        "league": "95",
+        "season": "2023"
+    },
+    "errors": [],
+    "results": 19,
+    "paging": {
+        "current": 1,
+        "total": 1
+    },
+    "response": [
+        {
+            "team": {
+                "id": 213,
+                "name": "Feirense",
+                "code": "FEI",
+                "country": "Portugal",
+                "founded": 1918,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/213.png"
+            },
+            "venue": {
+                "id": 1277,
+                "name": "Estádio Marcolino de Castro",
+                "address": "Avenida 25 de Abril 14",
+                "city": "Santa Maria da Feira",
+                "capacity": 5449,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1277.png"
+            }
+        },
+        {
+            "team": {
+                "id": 214,
+                "name": "Maritimo",
+                "code": "MAR",
+                "country": "Portugal",
+                "founded": 1910,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/214.png"
+            },
+            "venue": {
+                "id": 21117,
+                "name": "Estádio do Marítimo",
+                "address": "Rua do Dr. Pita",
+                "city": "Ilha da Madeira",
+                "capacity": 10932,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/21117.png"
+            }
+        },
+        {
+            "team": {
+                "id": 218,
+                "name": "Tondela",
+                "code": "TON",
+                "country": "Portugal",
+                "founded": null,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/218.png"
+            },
+            "venue": {
+                "id": 1271,
+                "name": "Estádio João Cardoso",
+                "address": "Rua Doutor Eurico José Gouveia",
+                "city": "Tondela",
+                "capacity": 7500,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1271.png"
+            }
+        },
+        
+        {
+            "team": {
+                "id": 229,
+                "name": "Benfica B",
+                "code": "BEN",
+                "country": "Portugal",
+                "founded": null,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/229.png"
+            },
+            "venue": {
+                "id": 1266,
+                "name": "Caixa Futebol Campus",
+                "address": "Benfica Campus",
+                "city": "Seixal",
+                "capacity": 2720,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1266.png"
+            }
+        },
+        {
+            "team": {
+                "id": 233,
+                "name": "Oliveirense",
+                "code": "OLI",
+                "country": "Portugal",
+                "founded": 1922,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/233.png"
+            },
+            "venue": {
+                "id": 10959,
+                "name": "Estádio Carlos Osório",
+                "address": "Rua Doutor Ilidio de Freitas",
+                "city": "Oliveira de Azeméis",
+                "capacity": 2670,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/10959.png"
+            }
+        },
+        {
+            "team": {
+                "id": 234,
+                "name": "Pacos Ferreira",
+                "code": "FER",
+                "country": "Portugal",
+                "founded": 1950,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/234.png"
+            },
+            "venue": {
+                "id": 1283,
+                "name": "Estádio da Capital do Móvel",
+                "address": "Rua do Estádio, Apartado 26",
+                "city": "Paços de Ferreira",
+                "capacity": 9146,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1283.png"
+            }
+        },
+        {
+            "team": {
+                "id": 235,
+                "name": "Penafiel",
+                "code": "PEN",
+                "country": "Portugal",
+                "founded": 1951,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/235.png"
+            },
+            "venue": {
+                "id": 1284,
+                "name": "Estádio Municipal 25 de Abril",
+                "address": "Rua Futebol Clube de Penafiel",
+                "city": "Penafiel",
+                "capacity": 6500,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1284.png"
+            }
+        },
+        {
+            "team": {
+                "id": 238,
+                "name": "Academico Viseu",
+                "code": "ACA",
+                "country": "Portugal",
+                "founded": 1914,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/238.png"
+            },
+            "venue": {
+                "id": 1264,
+                "name": "Estádio Municipal do Fontelo",
+                "address": "Avenida José Relvas",
+                "city": "Viseu",
+                "capacity": 14368,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1264.png"
+            }
+        },
+        {
+            "team": {
+                "id": 243,
+                "name": "FC Porto B",
+                "code": "POR",
+                "country": "Portugal",
+                "founded": null,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/243.png"
+            },
+            "venue": {
+                "id": 1287,
+                "name": "Estádio Dr. Jorge Sampaio",
+                "address": "Rua da Paradela",
+                "city": "Pedroso, Vila Nova de Gaia",
+                "capacity": 8500,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1287.png"
+            }
+        },
+        {
+            "team": {
+                "id": 244,
+                "name": "Leixoes",
+                "code": "LEI",
+                "country": "Portugal",
+                "founded": 1907,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/244.png"
+            },
+            "venue": {
+                "id": 1278,
+                "name": "Estádio do Mar",
+                "address": "Lugar da Cruz de Pau",
+                "city": "Matosinhos",
+                "capacity": 9730,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1278.png"
+            }
+        },
+        {
+            "team": {
+                "id": 245,
+                "name": "Mafra",
+                "code": "MAF",
+                "country": "Portugal",
+                "founded": 1965,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/245.png"
+            },
+            "venue": {
+                "id": 1270,
+                "name": "Estádio Municipal de Mafra",
+                "address": "Av. Dr. Francisco Sá Carneiro",
+                "city": "Mafra",
+                "capacity": 2900,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1270.png"
+            }
+        },
+        {
+            "team": {
+                "id": 4662,
+                "name": "União de Leiria",
+                "code": "LEI",
+                "country": "Portugal",
+                "founded": 1966,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/4662.png"
+            },
+            "venue": {
+                "id": 3514,
+                "name": "Estádio Dr. Magalhães Pessoa",
+                "address": "Avenida Bernardo Pimenta",
+                "city": "Leiria",
+                "capacity": 23888,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/3514.png"
+            }
+        },
+        {
+            "team": {
+                "id": 4799,
+                "name": "Torreense",
+                "code": "TOR",
+                "country": "Portugal",
+                "founded": null,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/4799.png"
+            },
+            "venue": {
+                "id": 3638,
+                "name": "Campo Manuel Marques",
+                "address": "Rua Cândido dos Reis",
+                "city": "Torres Vedras",
+                "capacity": 12000,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/3638.png"
+            }
+        },
+        {
+            "team": {
+                "id": 4814,
+                "name": "Vilaverdense",
+                "code": "VIL",
+                "country": "Portugal",
+                "founded": 1953,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/4814.png"
+            },
+            "venue": {
+                "id": 3646,
+                "name": "Campo Cruz Do Reguengo",
+                "address": "Rua Luís António Oliveira Ramos",
+                "city": "Vila Verde",
+                "capacity": 5000,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/3646.png"
+            }
+        },
+        {
+            "team": {
+                "id": 6358,
+                "name": "Lusitânia Lourosa",
+                "code": null,
+                "country": "Portugal",
+                "founded": 1924,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/6358.png"
+            },
+            "venue": {
+                "id": 4700,
+                "name": "Estádio do Lusitânia FC",
+                "address": "R. do Lusitânia 318",
+                "city": "Lourosa",
+                "capacity": 11000,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/4700.png"
+            }
+        },
+        {
+            "team": {
+                "id": 17692,
+                "name": "CF Os Belenenses",
+                "code": null,
+                "country": "Portugal",
+                "founded": 2018,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/17692.png"
+            },
+            "venue": {
+                "id": 12376,
+                "name": "Estádio do Restelo",
+                "address": "Avenida da Ilha da Madeira, Santa Maria de Belém",
+                "city": "Lisboa",
+                "capacity": 19856,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/12376.png"
+            }
+        },
+        {
+            "team": {
+                "id": 21595,
+                "name": "AVS",
+                "code": null,
+                "country": "Portugal",
+                "founded": null,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/21595.png"
+            },
+            "venue": {
+                "id": 1272,
+                "name": "Estádio Clube Desportivo das Aves",
+                "address": "Rua Luís Gonzaga Mendes de Carvalho 265",
+                "city": "Vila das Aves",
+                "capacity": 8560,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1272.png"
+            }
+        },
+        {
+            "team": {
+                "id": 223,
+                "name": "Chaves",
+                "code": "CHA",
+                "country": "Portugal",
+                "founded": 1949,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/223.png"
+            },
+            "venue": {
+                "id": 1273,
+                "name": "Estádio Municipal Eng. Manuel Branco Teixeira",
+                "address": "Avenida do Estádio Municipal",
+                "city": "Chaves",
+                "capacity": 12000,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1273.png"
+            }
+        },
+        {
+            "team": {
+                "id": 810,
+                "name": "Vizela",
+                "code": "VIZ",
+                "country": "Portugal",
+                "founded": 1939,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/810.png"
+            },
+            "venue": {
+                "id": 2817,
+                "name": "Estádio Do Vizela",
+                "address": null,
+                "city": "Caldas de Vizela",
+                "capacity": 6565,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/2817.png"
+            }
+        },
+        {
+            "team": {
+                "id": 216,
+                "name": "Portimonense",
+                "code": "POR",
+                "country": "Portugal",
+                "founded": 1914,
+                "national": false,
+                "logo": "https://media.api-sports.io/football/teams/216.png"
+            },
+            "venue": {
+                "id": 1285,
+                "name": "Estádio Municipal de Portimão",
+                "address": "Avenida Zeca Afonso Portimão",
+                "city": "Portimão",
+                "capacity": 9544,
+                "surface": "grass",
+                "image": "https://media.api-sports.io/football/venues/1285.png"
+            }
+        }
+    ]
+}

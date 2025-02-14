@@ -73,26 +73,6 @@
         },
         {
             "team": {
-                "id": 216,
-                "name": "Portimonense",
-                "code": "POR",
-                "country": "Portugal",
-                "founded": 1914,
-                "national": false,
-                "logo": "https://media.api-sports.io/football/teams/216.png"
-            },
-            "venue": {
-                "id": 1285,
-                "name": "Estádio Municipal de Portimão",
-                "address": "Avenida Zeca Afonso Portimão",
-                "city": "Portimão",
-                "capacity": 9544,
-                "surface": "grass",
-                "image": "https://media.api-sports.io/football/venues/1285.png"
-            }
-        },
-        {
-            "team": {
                 "id": 217,
                 "name": "SC Braga",
                 "code": "BRA",
@@ -133,22 +113,22 @@
         },
         {
             "team": {
-                "id": 223,
-                "name": "Chaves",
-                "code": "CHA",
+                "id": 227,
+                "name": "Santa Clara",
+                "code": "SAN",
                 "country": "Portugal",
-                "founded": 1949,
+                "founded": 1921,
                 "national": false,
-                "logo": "https://media.api-sports.io/football/teams/223.png"
+                "logo": "https://media.api-sports.io/football/teams/227.png"
             },
             "venue": {
-                "id": 1273,
-                "name": "Estádio Municipal Eng. Manuel Branco Teixeira",
-                "address": "Avenida do Estádio Municipal",
-                "city": "Chaves",
-                "capacity": 12000,
+                "id": 1289,
+                "name": "Estádio de São Miguel",
+                "address": "Rua Comandante Jaime de Sousa 21",
+                "city": "Ponta Delgada, Ilha de São Miguel, Açores",
+                "capacity": 13277,
                 "surface": "grass",
-                "image": "https://media.api-sports.io/football/venues/1273.png"
+                "image": "https://media.api-sports.io/football/venues/1289.png"
             }
         },
         {
@@ -313,22 +293,22 @@
         },
         {
             "team": {
-                "id": 810,
-                "name": "Vizela",
-                "code": "VIZ",
+                "id": 225,
+                "name": "Nacional",
+                "code": "NAC",
                 "country": "Portugal",
-                "founded": 1939,
+                "founded": 1910,
                 "national": false,
-                "logo": "https://media.api-sports.io/football/teams/810.png"
+                "logo": "https://media.api-sports.io/football/teams/225.png"
             },
             "venue": {
-                "id": 2817,
-                "name": "Estádio Do Vizela",
-                "address": null,
-                "city": "Caldas de Vizela",
-                "capacity": 6565,
+                "id": 1281,
+                "name": "Estádio da Madeira",
+                "address": "Rua do Esmeraldo, nº 46",
+                "city": "Ilha da Madeira",
+                "capacity": 5200,
                 "surface": "grass",
-                "image": "https://media.api-sports.io/football/venues/2817.png"
+                "image": "https://media.api-sports.io/football/venues/1281.png"
             }
         },
         {
