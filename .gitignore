@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 
 deploy.sh
+src/app/tactis-board/tugao.csv
