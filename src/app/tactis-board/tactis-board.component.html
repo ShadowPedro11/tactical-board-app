@@ -1,12 +1,16 @@
 <div class="layout">
   <div class="header">
+    <!-- Left Team Selector (Blue) -->
     <div class="team-selector blue">
-      <label for="teamSelect">Select Team:</label>
-      <select id="teamSelect" (change)="onTeamSelect($any($event.target).value)">
+      <label for="teamSelectA">Select Team:</label>
+      <select id="teamSelectA" (change)="onTeamSelect('A', $any($event))">
         <option value="">-- Select a Team --</option>
-        <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
+        <option *ngFor="let team of teams" [value]="team.team.id">
+          {{ team.team.name }}
+        </option>
       </select>
     </div>
+    <!-- Formation selectors (Purple) -->
     <div class="formation-selectors purple">
       <div class="selector">
         <label for="formationA">Team A Formation:</label>
@@ -21,24 +25,26 @@
         </select>
       </div>
     </div>
+    <!-- Right Team Selector (Blue) -->
     <div class="team-selector blue">
-      <label for="teamSelect">Select Team:</label>
-      <select id="teamSelect" (change)="onTeamSelect($any($event.target).value)">
+      <label for="teamSelectB">Select Team:</label>
+      <select id="teamSelectB" (change)="onTeamSelect('B', $any($event))">
         <option value="">-- Select a Team --</option>
-        <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
+        <option *ngFor="let team of teams" [value]="team.team.id">
+          {{ team.team.name }}
+        </option>
       </select>
     </div>
   </div>
 
   <!-- Main area: red team pictures on sides with the green field in the center -->
   <div class="main">
+    <!-- Left Team Picture (Red) -->
     <div class="team-picture red">
-      <!-- Replace with your Team A picture -->
-      <img src="assets/teamA.jpg" alt="Team A" />
+      <img [src]="selectedTeamA ? selectedTeamA.team.logo : 'assets/teamA.jpg'" alt="Team A" />
     </div>
     <div class="field-container green">
-      <!-- The existing field container (green) -->
-      <!-- Added template reference and new drag/drop event bindings -->
+      <!-- Field container (Green) with drag/drop bindings -->
       <div #container class="container"
            (mousemove)="onFieldMouseMove($event)"
            (mouseup)="onFieldMouseUp($event)"
@@ -81,9 +87,9 @@
         </div>
       </div>
     </div>
+    <!-- Right Team Picture (Red) -->
     <div class="team-picture red">
-      <!-- Replace with your Team B picture -->
-      <img src="assets/teamB.jpg" alt="Team B" />
+      <img [src]="selectedTeamB ? selectedTeamB.team.logo : 'assets/teamB.jpg'" alt="Team B" />
     </div>
   </div>
 </div>

@@ -32,7 +32,9 @@ export class TactisBoardComponent implements OnInit {
 
   formations = formations;
   teams: Team[] = [];
-  selectedTeam: Team | null = null;
+  // Separate selected teams for left (A) and right (B)
+  selectedTeamA: Team | null = null;
+  selectedTeamB: Team | null = null;
 
   selectedFormationA: Formation | null = null;
   selectedFormationB: Formation | null = null;
@@ -48,7 +50,7 @@ export class TactisBoardComponent implements OnInit {
   constructor(private teamService: TeamService) {}
 
   ngOnInit(): void {
-    // Fetch teams from the external API
+    // Load teams from your local Portugal.json file via TeamService
     this.teamService.getTeams().subscribe({
       next: (data) => (this.teams = data),
       error: (err) => console.error('Error fetching teams:', err)
@@ -81,11 +83,17 @@ export class TactisBoardComponent implements OnInit {
     }
   }
 
-  // Handle team selection from a dropdown.
-  onTeamSelect(event: any): void {
+  // Updated team selection: include a side parameter ("A" for left, "B" for right)
+  onTeamSelect(side: 'A' | 'B', event: any): void {
     const teamId = +event.target.value;
-    this.selectedTeam = this.teams.find(team => team.id === teamId) || null;
-    console.log('Selected team:', this.selectedTeam);
+    const selected = this.teams.find(team => team.team.id === teamId) || null;
+    if (side === 'A') {
+      this.selectedTeamA = selected;
+      console.log('Selected Team A:', this.selectedTeamA);
+    } else {
+      this.selectedTeamB = selected;
+      console.log('Selected Team B:', this.selectedTeamB);
+    }
   }
 
   // ---------------------------

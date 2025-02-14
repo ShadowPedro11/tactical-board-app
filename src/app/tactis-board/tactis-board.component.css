@@ -55,10 +55,8 @@
 
 /* Red team pictures */
 .team-picture.red {
-  background-color: #dc3545;  /* red */
   width: 150px;
   height: 150px;
-  border-radius: 50%;
   overflow: hidden;
   display: flex;
   justify-content: center;

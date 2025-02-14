@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import teamsData from '../json/Portugal.json'; // adjust the path as needed
 
 export interface Team {
-  id: number;
-  name: string;
-  logoUrl?: string;
+  team: {
+    id: number;
+    name: string;
+    code: string | null;
+    country: string;
+    founded: number | null;
+    national: boolean;
+    logo: string;
+  };
+  venue: {
+    id: number;
+    name: string;
+    address: string | null;
+    city: string;
+    capacity: number;
+    surface: string;
+    image: string;
+  };
 }
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class TeamService {
-  // Replace with your actual API endpoint.
-  private apiUrl = 'https://api.example.com/teams';
-
-  constructor(private http: HttpClient) {}
-
   getTeams(): Observable<Team[]> {
-    const mockTeams: Team[] = [
-      { id: 1, name: 'Team A', logoUrl: 'https://example.com/logoA.png' },
-      { id: 2, name: 'Team B', logoUrl: 'https://example.com/logoB.png' },
-      { id: 3, name: 'Team C', logoUrl: 'https://example.com/logoC.png' }
-    ];
-    return new Observable<Team[]>(observer => {
-      observer.next(mockTeams);
-      observer.complete();
-    });
-    
+    return of(teamsData.response);
   }
 }
