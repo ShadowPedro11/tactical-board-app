@@ -1,0 +1,3014 @@
+{
+    "222": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "César"
+                },
+                {
+                    "number": "12",
+                    "name": "Luís Pires"
+                },
+                {
+                    "number": "31",
+                    "name": "Tomas Vaclik"
+                },
+                {
+                    "number": "76",
+                    "name": "Tomé Sousa"
+                },
+                {
+                    "number": "99",
+                    "name": "João Gonçalves"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "15",
+                    "name": "Pedro Gomes"
+                },
+                {
+                    "number": "27",
+                    "name": "Osman Kakay"
+                },
+                {
+                    "number": "35",
+                    "name": "Gonçalo Almeida"
+                },
+                {
+                    "number": "13",
+                    "name": "Sidoine Fogning"
+                },
+                {
+                    "number": "19",
+                    "name": "Steven Vitória"
+                },
+                {
+                    "number": "26",
+                    "name": "Rodrigo Abascal"
+                },
+                {
+                    "number": "73",
+                    "name": "Alexandre Marques"
+                },
+                {
+                    "number": "85",
+                    "name": "Leonardo Ferreira"
+                },
+                {
+                    "number": "95",
+                    "name": "Vitalii Lystsov"
+                },
+                {
+                    "number": "3",
+                    "name": "Layvin Kurzawa"
+                },
+                {
+                    "number": "20",
+                    "name": "Filipe Ferreira"
+                },
+                {
+                    "number": "25",
+                    "name": "Augusto Dabó"
+                },
+                {
+                    "number": "75",
+                    "name": "Tomás Silva"
+                },
+                {
+                    "number": "70",
+                    "name": "Bruno Onyemaechi"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "2",
+                    "name": "Ibrahima Camará"
+                },
+                {
+                    "number": "18",
+                    "name": "Ilija Vukotic"
+                },
+                {
+                    "number": "24",
+                    "name": "Sebastián Pérez"
+                },
+                {
+                    "number": "8",
+                    "name": "Marco van Ginkel"
+                },
+                {
+                    "number": "10",
+                    "name": "Miguel Reisinho"
+                },
+                {
+                    "number": "16",
+                    "name": "Joel Silva"
+                },
+                {
+                    "number": "88",
+                    "name": "Marco Ribeiro"
+                },
+                {
+                    "number": "4",
+                    "name": "Ibrahim Alhassan"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "7",
+                    "name": "Salvador Agra"
+                },
+                {
+                    "number": "11",
+                    "name": "Gboly Ariyibi"
+                },
+                {
+                    "number": "9",
+                    "name": "Róbert Bozenik"
+                },
+                {
+                    "number": "14",
+                    "name": "Moussa Koné"
+                },
+                {
+                    "number": "17",
+                    "name": "Manuel Namora"
+                },
+                {
+                    "number": "23",
+                    "name": "Tiago Machado"
+                },
+                {
+                    "number": "74",
+                    "name": "Diego Llorente"
+                },
+                {
+                    "number": "82",
+                    "name": "Fábio Sambú"
+                },
+                {
+                    "number": "71",
+                    "name": "João Barros"
+                },
+                {
+                    "number": "27",
+                    "name": "Bruninho"
+                }
+            ]
+        }
+    },
+    "231": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Kaique"
+                },
+                {
+                    "number": "22",
+                    "name": "Miguel Carvalho"
+                },
+                {
+                    "number": "33",
+                    "name": "Ricardo Velho"
+                },
+                {
+                    "number": "47",
+                    "name": "Kauan Firmino"
+                },
+                {
+                    "number": "1",
+                    "name": "Luiz Felipe"
+                },
+                {
+                    "number": "23",
+                    "name": "Lucas Cañizares"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "28",
+                    "name": "Pastor"
+                },
+                {
+                    "number": "70",
+                    "name": "Rivaldo Morais"
+                },
+                {
+                    "number": "3",
+                    "name": "Marco Moreno"
+                },
+                {
+                    "number": "4",
+                    "name": "Artur Jorge"
+                },
+                {
+                    "number": "5",
+                    "name": "Tomás Ribeiro"
+                },
+                {
+                    "number": "34",
+                    "name": "Raul Silva"
+                },
+                {
+                    "number": "44",
+                    "name": "Lucas Áfrico"
+                },
+                {
+                    "number": "2",
+                    "name": "Paulo Victor"
+                },
+                {
+                    "number": "31",
+                    "name": "Derick Poloni"
+                },
+                {
+                    "number": "12",
+                    "name": "Talys Oliveira"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "-",
+                    "name": "Mohamed Silmi"
+                },
+                {
+                    "number": "29",
+                    "name": "Cláudio Falcão"
+                },
+                {
+                    "number": "88",
+                    "name": "Rafael Teixeira"
+                },
+                {
+                    "number": "6",
+                    "name": "Ângelo Neto"
+                },
+                {
+                    "number": "8",
+                    "name": "Zé Carlos"
+                },
+                {
+                    "number": "21",
+                    "name": "Filipe Soares"
+                },
+                {
+                    "number": "80",
+                    "name": "Samuel Justo"
+                },
+                {
+                    "number": "93",
+                    "name": "Miguel Menino"
+                },
+                {
+                    "number": "10",
+                    "name": "Jhon Velásquez"
+                },
+                {
+                    "number": "-",
+                    "name": "Fred"
+                },
+                {
+                    "number": "50",
+                    "name": "André Seruca"
+                },
+                {
+                    "number": "8",
+                    "name": "Rafael Barbosa"
+                },
+                {
+                    "number": "16",
+                    "name": "Geovanny Almeida"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "20",
+                    "name": "Rony Lopes"
+                },
+                {
+                    "number": "41",
+                    "name": "André Candeias"
+                },
+                {
+                    "number": "9",
+                    "name": "Tomané"
+                },
+                {
+                    "number": "10",
+                    "name": "Yusupha Njie"
+                },
+                {
+                    "number": "14",
+                    "name": "Darío Poveda"
+                },
+                {
+                    "number": "19",
+                    "name": "Rui Costa"
+                },
+                {
+                    "number": "7",
+                    "name": "Elves Baldé"
+                },
+                {
+                    "number": "11",
+                    "name": "Álex Bermejo"
+                },
+                {
+                    "number": "77",
+                    "name": "Marco Matias"
+                },
+                {
+                    "number": "62",
+                    "name": "Mohamed Belloumi"
+                },
+                {
+                    "number": "71",
+                    "name": "Jaiminho"
+                },
+                {
+                    "number": "79",
+                    "name": "Mehdi Merghem"
+                },
+                {
+                    "number": "17",
+                    "name": "Cuba"
+                },
+                {
+                    "number": "19",
+                    "name": "Álex Millán"
+                },
+                {
+                    "number": "20",
+                    "name": "Tiago Madeira"
+                }
+            ]
+        }
+    },
+    "15130": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Francisco Meixedo"
+                },
+                {
+                    "number": "24",
+                    "name": "João Costa"
+                },
+                {
+                    "number": "93",
+                    "name": "Marko Gudzulic"
+                },
+                {
+                    "number": "30",
+                    "name": "Bruno Brígido"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "44",
+                    "name": "Semeu Commey"
+                },
+                {
+                    "number": "2",
+                    "name": "Diogo Travassos"
+                },
+                {
+                    "number": "20",
+                    "name": "Juan Mina"
+                },
+                {
+                    "number": "4",
+                    "name": "Ferro"
+                },
+                {
+                    "number": "5",
+                    "name": "Issiar Dramé"
+                },
+                {
+                    "number": "13",
+                    "name": "Miguel Lopes"
+                },
+                {
+                    "number": "23",
+                    "name": "Georgii Tunguliiadi"
+                },
+                {
+                    "number": "42",
+                    "name": "Renato Pantalon"
+                },
+                {
+                    "number": "7",
+                    "name": "Fábio Ronaldo"
+                },
+                {
+                    "number": "21",
+                    "name": "Guilherme Montóia"
+                },
+                {
+                    "number": "25",
+                    "name": "Nilton Varela"
+                },
+                {
+                    "number": "28",
+                    "name": "Rúben Lima"
+                },
+                {
+                    "number": "77",
+                    "name": "Danilo Veiga"
+                },
+                {
+                    "number": "3",
+                    "name": "Till Cissokho"
+                },
+                {
+                    "number": "44",
+                    "name": "Tiago Gabriel"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "-",
+                    "name": "Mohamed Elbatal"
+                },
+                {
+                    "number": "-",
+                    "name": "VH Moura"
+                },
+                {
+                    "number": "87",
+                    "name": "Alexandre Sola"
+                },
+                {
+                    "number": "8",
+                    "name": "Daniel Cabral"
+                },
+                {
+                    "number": "42",
+                    "name": "Manuel Keliano"
+                },
+                {
+                    "number": "10",
+                    "name": "Alan Ruiz"
+                },
+                {
+                    "number": "12",
+                    "name": "Amine Oudrhiri"
+                },
+                {
+                    "number": "19",
+                    "name": "Paulo Moreira"
+                },
+                {
+                    "number": "22",
+                    "name": "Léo Cordeiro"
+                },
+                {
+                    "number": "26",
+                    "name": "Leonel Bucca"
+                },
+                {
+                    "number": "6",
+                    "name": "Igor Jesus"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "33",
+                    "name": "Paulo Vítor"
+                },
+                {
+                    "number": "9",
+                    "name": "Rodrigo Pinho"
+                },
+                {
+                    "number": "98",
+                    "name": "Kikas"
+                },
+                {
+                    "number": "17",
+                    "name": "Chico Banza"
+                },
+                {
+                    "number": "77",
+                    "name": "Gerson Sousa"
+                },
+                {
+                    "number": "88",
+                    "name": "Tiago Ferreira"
+                },
+                {
+                    "number": "97",
+                    "name": "Jovane Cabral"
+                },
+                {
+                    "number": "11",
+                    "name": "Gustavo Henrique"
+                },
+                {
+                    "number": "38",
+                    "name": "Caio Santana"
+                },
+                {
+                    "number": "81",
+                    "name": "Manu"
+                },
+                {
+                    "number": "99",
+                    "name": "Bilal Mazhar"
+                },
+                {
+                    "number": "7",
+                    "name": "André Luiz"
+                },
+                {
+                    "number": "17",
+                    "name": "Nani"
+                },
+                {
+                    "number": "37",
+                    "name": "Petterson Novaes"
+                }
+            ]
+        }
+    },
+    "21595": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "13",
+                    "name": "Guillermo Ochoa"
+                },
+                {
+                    "number": "88",
+                    "name": "Pedro Trigueira"
+                },
+                {
+                    "number": "93",
+                    "name": "Simão Bertelli"
+                },
+                {
+                    "number": "1",
+                    "name": "Lucas Moura"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "2",
+                    "name": "Fernando Fonseca"
+                },
+                {
+                    "number": "25",
+                    "name": "Tomás Tavares"
+                },
+                {
+                    "number": "-",
+                    "name": "Thiago Freitas"
+                },
+                {
+                    "number": "4",
+                    "name": "Nacho Rodríguez"
+                },
+                {
+                    "number": "5",
+                    "name": "Jorge Teixeira"
+                },
+                {
+                    "number": "6",
+                    "name": "Baptiste Roux"
+                },
+                {
+                    "number": "33",
+                    "name": "Aderllan Santos"
+                },
+                {
+                    "number": "42",
+                    "name": "Cristian Devenish"
+                },
+                {
+                    "number": "3",
+                    "name": "Rafael Rodrigues"
+                },
+                {
+                    "number": "24",
+                    "name": "Kiki Afonso"
+                },
+                {
+                    "number": "27",
+                    "name": "Eric Veiga"
+                },
+                {
+                    "number": "22",
+                    "name": "Léo Alaba"
+                },
+                {
+                    "number": "40",
+                    "name": "Clayton Sampaio"
+                },
+                {
+                    "number": "98",
+                    "name": "Zé Ricardo"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "-",
+                    "name": "Tiago Galletto"
+                },
+                {
+                    "number": "12",
+                    "name": "Gustavo Assunção"
+                },
+                {
+                    "number": "15",
+                    "name": "Jaume Grau"
+                },
+                {
+                    "number": "23",
+                    "name": "Gustavo Mendonça"
+                },
+                {
+                    "number": "7",
+                    "name": "Lucas Fernandes"
+                },
+                {
+                    "number": "14",
+                    "name": "Lucas Piazón"
+                },
+                {
+                    "number": "8",
+                    "name": "Giorgi Aburjania"
+                },
+                {
+                    "number": "47",
+                    "name": "Jonatan Lucca"
+                },
+                {
+                    "number": "7",
+                    "name": "Luís Silva"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "10",
+                    "name": "Vasco Lopes"
+                },
+                {
+                    "number": "16",
+                    "name": "Yair Mena"
+                },
+                {
+                    "number": "18",
+                    "name": "Nenê"
+                },
+                {
+                    "number": "20",
+                    "name": "Rodrigo Ribeiro"
+                },
+                {
+                    "number": "29",
+                    "name": "Zé Luís"
+                },
+                {
+                    "number": "9",
+                    "name": "Gerson Rodrigues"
+                },
+                {
+                    "number": "11",
+                    "name": "Babatunde Akinsola"
+                },
+                {
+                    "number": "17",
+                    "name": "John Mercado"
+                },
+                {
+                    "number": "9",
+                    "name": "Issiaka Kamate"
+                },
+                {
+                    "number": "70",
+                    "name": "Samuel Granada"
+                }
+            ]
+        }
+    },
+    "225": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Rui Encarnação"
+                },
+                {
+                    "number": "12",
+                    "name": "César Augusto"
+                },
+                {
+                    "number": "37",
+                    "name": "Lucas França"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "2",
+                    "name": "João Aurélio"
+                },
+                {
+                    "number": "22",
+                    "name": "Garcia"
+                },
+                {
+                    "number": "-",
+                    "name": "Ivanildo Fernandes"
+                },
+                {
+                    "number": "33",
+                    "name": "Chico Gonçalves"
+                },
+                {
+                    "number": "34",
+                    "name": "Léo Santos"
+                },
+                {
+                    "number": "38",
+                    "name": "Zé Vitor"
+                },
+                {
+                    "number": "40",
+                    "name": "Ulisses Wilson"
+                },
+                {
+                    "number": "5",
+                    "name": "José Gomes"
+                },
+                {
+                    "number": "43",
+                    "name": "Douglas Sequeira"
+                },
+                {
+                    "number": "25",
+                    "name": "Afonso Freitas"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "27",
+                    "name": "Djibril Soumaré"
+                },
+                {
+                    "number": "88",
+                    "name": "Matheus Dias"
+                },
+                {
+                    "number": "15",
+                    "name": "Chiheb Labidi"
+                },
+                {
+                    "number": "17",
+                    "name": "Daniel Penha"
+                },
+                {
+                    "number": "19",
+                    "name": "Miguel Baeza"
+                },
+                {
+                    "number": "8",
+                    "name": "Bruno Costa"
+                },
+                {
+                    "number": "10",
+                    "name": "Luís Esteves"
+                },
+                {
+                    "number": "18",
+                    "name": "André Sousa"
+                },
+                {
+                    "number": "20",
+                    "name": "Jota Garcês"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "-",
+                    "name": "Fuki Yamada"
+                },
+                {
+                    "number": "70",
+                    "name": "Arvin Appiah"
+                },
+                {
+                    "number": "-",
+                    "name": "Joel Tagueu"
+                },
+                {
+                    "number": "23",
+                    "name": "Isaac Tomich"
+                },
+                {
+                    "number": "89",
+                    "name": "Dyego Sousa"
+                },
+                {
+                    "number": "99",
+                    "name": "Dudu"
+                },
+                {
+                    "number": "-",
+                    "name": "Paulinho Bóia"
+                },
+                {
+                    "number": "7",
+                    "name": "Rúben Macedo"
+                },
+                {
+                    "number": "9",
+                    "name": "Adrián Butzke"
+                },
+                {
+                    "number": "72",
+                    "name": "Tiago Reis"
+                },
+                {
+                    "number": "11",
+                    "name": "Nigel Thomas"
+                },
+                {
+                    "number": "77",
+                    "name": "Gabriel Santos"
+                }
+            ]
+        }
+    },
+    "762": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "42",
+                    "name": "Andrew Ventura"
+                },
+                {
+                    "number": "51",
+                    "name": "Milos Gordic"
+                },
+                {
+                    "number": "99",
+                    "name": "Brian Araújo"
+                },
+                {
+                    "number": "1",
+                    "name": "Vinícius Dias"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "-",
+                    "name": "Thomás Luciano"
+                },
+                {
+                    "number": "2",
+                    "name": "Zé Carlos"
+                },
+                {
+                    "number": "45",
+                    "name": "Jonathan Mutombo"
+                },
+                {
+                    "number": "4",
+                    "name": "Marvin Elimbi"
+                },
+                {
+                    "number": "14",
+                    "name": "Carlos Ventura"
+                },
+                {
+                    "number": "23",
+                    "name": "Josué Sá"
+                },
+                {
+                    "number": "26",
+                    "name": "Rúben Fernandes"
+                },
+                {
+                    "number": "39",
+                    "name": "Jonathan Buatu"
+                },
+                {
+                    "number": "57",
+                    "name": "Sandro Cruz"
+                },
+                {
+                    "number": "88",
+                    "name": "Kazu"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "-",
+                    "name": "Diogo Costa"
+                },
+                {
+                    "number": "15",
+                    "name": "Yaya Sithole"
+                },
+                {
+                    "number": "16",
+                    "name": "Gui Beleza"
+                },
+                {
+                    "number": "10",
+                    "name": "Kanya Fujimoto"
+                },
+                {
+                    "number": "19",
+                    "name": "Santi García"
+                },
+                {
+                    "number": "-",
+                    "name": "Mohamed Bamba"
+                },
+                {
+                    "number": "5",
+                    "name": "Facundo Cáseres"
+                },
+                {
+                    "number": "6",
+                    "name": "Jesús Castillo"
+                },
+                {
+                    "number": "18",
+                    "name": "João Teixeira"
+                },
+                {
+                    "number": "8",
+                    "name": "Maxime Dominguez"
+                },
+                {
+                    "number": "24",
+                    "name": "Mory Gbane"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "22",
+                    "name": "Sergio Bermejo"
+                },
+                {
+                    "number": "9",
+                    "name": "Jorge Aguirre"
+                },
+                {
+                    "number": "9",
+                    "name": "Carlos Eduardo"
+                },
+                {
+                    "number": "90",
+                    "name": "Pablo Felipe"
+                },
+                {
+                    "number": "7",
+                    "name": "Tidjany Touré"
+                },
+                {
+                    "number": "33",
+                    "name": "João Marques"
+                },
+                {
+                    "number": "71",
+                    "name": "Félix Correia"
+                },
+                {
+                    "number": "77",
+                    "name": "Jordi Mboula"
+                },
+                {
+                    "number": "29",
+                    "name": "Depú"
+                },
+                {
+                    "number": "20",
+                    "name": "Cauê dos Santos"
+                },
+                {
+                    "number": "11",
+                    "name": "Diego Collado"
+                },
+                {
+                    "number": "13",
+                    "name": "João Pinto"
+                }
+            ]
+        }
+    },
+    "240": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "João Valido"
+                },
+                {
+                    "number": "30",
+                    "name": "Jakub Vinarcik"
+                },
+                {
+                    "number": "58",
+                    "name": "Nico Mantl"
+                },
+                {
+                    "number": "12",
+                    "name": "Thiago Rodrigues"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "28",
+                    "name": "Tiago Esgaio"
+                },
+                {
+                    "number": "78",
+                    "name": "Alex Pinto"
+                },
+                {
+                    "number": "3",
+                    "name": "Jose Fontán"
+                },
+                {
+                    "number": "4",
+                    "name": "Matías Rocha"
+                },
+                {
+                    "number": "13",
+                    "name": "Boris Popović"
+                },
+                {
+                    "number": "44",
+                    "name": "Nino Galovic"
+                },
+                {
+                    "number": "73",
+                    "name": "Chico Lamba"
+                },
+                {
+                    "number": "26",
+                    "name": "Weverson Costa"
+                },
+                {
+                    "number": "27",
+                    "name": "Amadou Danté"
+                },
+                {
+                    "number": "6",
+                    "name": "Quaresma"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "20",
+                    "name": "Pedro Moreira"
+                },
+                {
+                    "number": "31",
+                    "name": "Mamadou Loum"
+                },
+                {
+                    "number": "22",
+                    "name": "Pablo Gozálbez"
+                },
+                {
+                    "number": "89",
+                    "name": "Pedro Santos"
+                },
+                {
+                    "number": "2",
+                    "name": "Morlaye Sylla"
+                },
+                {
+                    "number": "5",
+                    "name": "David Simão"
+                },
+                {
+                    "number": "21",
+                    "name": "Taichi Fukui"
+                },
+                {
+                    "number": "8",
+                    "name": "Eboué Kouassi"
+                },
+                {
+                    "number": "14",
+                    "name": "Uri Busquets"
+                },
+                {
+                    "number": "43",
+                    "name": "Vitinho"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "10",
+                    "name": "Jason Remeseiro"
+                },
+                {
+                    "number": "23",
+                    "name": "Dylan Nandín"
+                },
+                {
+                    "number": "39",
+                    "name": "Henrique Araújo"
+                },
+                {
+                    "number": "50",
+                    "name": "Güven Yalçin"
+                },
+                {
+                    "number": "11",
+                    "name": "Miguel Puche"
+                },
+                {
+                    "number": "19",
+                    "name": "Alfonso Trezza"
+                },
+                {
+                    "number": "24",
+                    "name": "Brian Mansilla"
+                },
+                {
+                    "number": "9",
+                    "name": "Uladzislau Marozau"
+                },
+                {
+                    "number": "7",
+                    "name": "Ivo Rodrigues"
+                },
+                {
+                    "number": "23",
+                    "name": "Cristo González"
+                }
+            ]
+        }
+    },
+    "215": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "16",
+                    "name": "Mika"
+                },
+                {
+                    "number": "22",
+                    "name": "Caio Secco"
+                },
+                {
+                    "number": "40",
+                    "name": "Kewin Silva"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "2",
+                    "name": "Dani Morer"
+                },
+                {
+                    "number": "76",
+                    "name": "Dinis Pinto"
+                },
+                {
+                    "number": "3",
+                    "name": "Michel"
+                },
+                {
+                    "number": "26",
+                    "name": "Maracás"
+                },
+                {
+                    "number": "44",
+                    "name": "Marcelo"
+                },
+                {
+                    "number": "66",
+                    "name": "Gilberto Batista"
+                },
+                {
+                    "number": "15",
+                    "name": "Leonardo Buta"
+                },
+                {
+                    "number": "23",
+                    "name": "Godfried Frimpong"
+                },
+                {
+                    "number": "2",
+                    "name": "Fabiano Souza"
+                },
+                {
+                    "number": "3",
+                    "name": "Carlos Henrique"
+                },
+                {
+                    "number": "14",
+                    "name": "Carlos Ponck"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "6",
+                    "name": "Rúben Ismael"
+                },
+                {
+                    "number": "25",
+                    "name": "Afonso Assis"
+                },
+                {
+                    "number": "28",
+                    "name": "Guilherme Liberato"
+                },
+                {
+                    "number": "11",
+                    "name": "Alanzinho"
+                },
+                {
+                    "number": "20",
+                    "name": "Benny"
+                },
+                {
+                    "number": "80",
+                    "name": "Lawrence Ofori"
+                },
+                {
+                    "number": "5",
+                    "name": "Sidnei Tavares"
+                },
+                {
+                    "number": "8",
+                    "name": "André Castro"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "7",
+                    "name": "Hernâni Infande"
+                },
+                {
+                    "number": "17",
+                    "name": "Cédric Teguia"
+                },
+                {
+                    "number": "21",
+                    "name": "Pedro Santos"
+                },
+                {
+                    "number": "9",
+                    "name": "Luís Asué"
+                },
+                {
+                    "number": "95",
+                    "name": "Guilherme Schettine"
+                },
+                {
+                    "number": "99",
+                    "name": "Yan Maranhão"
+                },
+                {
+                    "number": "8",
+                    "name": "Ivo Rodrigues"
+                },
+                {
+                    "number": "10",
+                    "name": "Jeremy Antonisse"
+                },
+                {
+                    "number": "19",
+                    "name": "Joel Jorquera"
+                },
+                {
+                    "number": "31",
+                    "name": "Madson"
+                },
+                {
+                    "number": "77",
+                    "name": "Gabrielzinho"
+                }
+            ]
+        }
+    },
+    "226": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Cezary Miszta"
+                },
+                {
+                    "number": "89",
+                    "name": "Lazar Radojicic"
+                },
+                {
+                    "number": "95",
+                    "name": "Matheus Teixeira"
+                },
+                {
+                    "number": "99",
+                    "name": "Antzelo Sina"
+                },
+                {
+                    "number": "18",
+                    "name": "Jhonatan Luiz"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "17",
+                    "name": "Marious Vrousai"
+                },
+                {
+                    "number": "20",
+                    "name": "João Tomé"
+                },
+                {
+                    "number": "82",
+                    "name": "Jorge Karseladze"
+                },
+                {
+                    "number": "2",
+                    "name": "Jonathan Panzo"
+                },
+                {
+                    "number": "3",
+                    "name": "Andreas Ndoj"
+                },
+                {
+                    "number": "4",
+                    "name": "Nelson Abbey"
+                },
+                {
+                    "number": "22",
+                    "name": "João Pedro"
+                },
+                {
+                    "number": "23",
+                    "name": "Pancho Petrasso"
+                },
+                {
+                    "number": "93",
+                    "name": "Konstantinos Kostoulas"
+                },
+                {
+                    "number": "98",
+                    "name": "Omar Richards"
+                },
+                {
+                    "number": "-",
+                    "name": "Miguel Nóbrega"
+                },
+                {
+                    "number": "4",
+                    "name": "Patrick William"
+                },
+                {
+                    "number": "33",
+                    "name": "Aderllan Santos"
+                },
+                {
+                    "number": "42",
+                    "name": "Renato Pantalon"
+                },
+                {
+                    "number": "43",
+                    "name": "João Muniz"
+                },
+                {
+                    "number": "77",
+                    "name": "Fábio Ronaldo"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "29",
+                    "name": "Theofanis Bakoulas"
+                },
+                {
+                    "number": "-",
+                    "name": "Michalis Patiras"
+                },
+                {
+                    "number": "6",
+                    "name": "João Novais"
+                },
+                {
+                    "number": "16",
+                    "name": "Brandon Aguilera"
+                },
+                {
+                    "number": "80",
+                    "name": "Ole Pohlmann"
+                },
+                {
+                    "number": "8",
+                    "name": "Vítor Gomes"
+                },
+                {
+                    "number": "21",
+                    "name": "João Graça"
+                },
+                {
+                    "number": "34",
+                    "name": "Demir Tiknaz"
+                },
+                {
+                    "number": "76",
+                    "name": "Martim Neto"
+                },
+                {
+                    "number": "10",
+                    "name": "Amine Oudrhiri"
+                },
+                {
+                    "number": "5",
+                    "name": "Georgios Okkas"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "-",
+                    "name": "Caike"
+                },
+                {
+                    "number": "-",
+                    "name": "Amadou Camara"
+                },
+                {
+                    "number": "27",
+                    "name": "Tobías Medina"
+                },
+                {
+                    "number": "9",
+                    "name": "Clayton Silva"
+                },
+                {
+                    "number": "14",
+                    "name": "Karem Zoabi"
+                },
+                {
+                    "number": "15",
+                    "name": "Chukwudi Igbokwe"
+                },
+                {
+                    "number": "7",
+                    "name": "André Luiz"
+                },
+                {
+                    "number": "11",
+                    "name": "Tiago Morais"
+                },
+                {
+                    "number": "19",
+                    "name": "Kiko Bondoso"
+                },
+                {
+                    "number": "94",
+                    "name": "Valentim Sousa"
+                },
+                {
+                    "number": "-",
+                    "name": "Junior Colina"
+                },
+                {
+                    "number": "-",
+                    "name": "Saba Samushia"
+                },
+                {
+                    "number": "22",
+                    "name": "Ahmed Hassan"
+                }
+            ]
+        }
+    },
+    "242": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Ivan Zlobin"
+                },
+                {
+                    "number": "22",
+                    "name": "Gabriel Cabral"
+                },
+                {
+                    "number": "25",
+                    "name": "Lazar Carević"
+                },
+                {
+                    "number": "90",
+                    "name": "Hugo Cunha"
+                },
+                {
+                    "number": "31",
+                    "name": "Luiz Júnior"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "2",
+                    "name": "Lucas Calegari"
+                },
+                {
+                    "number": "17",
+                    "name": "Rodrigo Pinheiro"
+                },
+                {
+                    "number": "3",
+                    "name": "Léo Realpe"
+                },
+                {
+                    "number": "4",
+                    "name": "Enea Mihaj"
+                },
+                {
+                    "number": "16",
+                    "name": "Justin de Haas"
+                },
+                {
+                    "number": "55",
+                    "name": "Ibrahima Ba"
+                },
+                {
+                    "number": "62",
+                    "name": "José Müller"
+                },
+                {
+                    "number": "5",
+                    "name": "Rafa Soares"
+                },
+                {
+                    "number": "30",
+                    "name": "Pedro Bondo"
+                },
+                {
+                    "number": "15",
+                    "name": "Riccieli"
+                },
+                {
+                    "number": "74",
+                    "name": "Francisco Moura"
+                },
+                {
+                    "number": "75",
+                    "name": "Diogo Costa"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "6",
+                    "name": "Tom van de Looi"
+                },
+                {
+                    "number": "8",
+                    "name": "Mirko Topić"
+                },
+                {
+                    "number": "18",
+                    "name": "Otso Liimatta"
+                },
+                {
+                    "number": "20",
+                    "name": "Gustavo Sá"
+                },
+                {
+                    "number": "88",
+                    "name": "Samuel Lobato"
+                },
+                {
+                    "number": "14",
+                    "name": "Mathias de Amorim"
+                },
+                {
+                    "number": "15",
+                    "name": "Otar Mamageishvili"
+                },
+                {
+                    "number": "28",
+                    "name": "Zaydou Youssouf"
+                },
+                {
+                    "number": "80",
+                    "name": "João Neto"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "7",
+                    "name": "Sorriso"
+                },
+                {
+                    "number": "23",
+                    "name": "Gil Dias"
+                },
+                {
+                    "number": "12",
+                    "name": "Simon Elisor"
+                },
+                {
+                    "number": "21",
+                    "name": "Yassir Zabiri"
+                },
+                {
+                    "number": "29",
+                    "name": "Václav Sejk"
+                },
+                {
+                    "number": "85",
+                    "name": "Leonardo Oliveira"
+                },
+                {
+                    "number": "10",
+                    "name": "Rochinha"
+                },
+                {
+                    "number": "11",
+                    "name": "Óscar Aranda"
+                },
+                {
+                    "number": "71",
+                    "name": "Diogo Cabral"
+                },
+                {
+                    "number": "19",
+                    "name": "Afonso Rodrigues"
+                },
+                {
+                    "number": "9",
+                    "name": "Mario González"
+                }
+            ]
+        }
+    },
+    "230": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Kevin Chamorro"
+                },
+                {
+                    "number": "27",
+                    "name": "Joel Robles"
+                },
+                {
+                    "number": "31",
+                    "name": "Diogo Dias"
+                },
+                {
+                    "number": "99",
+                    "name": "Dani Figueira"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "-",
+                    "name": "Yanis Boisseau"
+                },
+                {
+                    "number": "-",
+                    "name": "Philippe Lanquetin"
+                },
+                {
+                    "number": "20",
+                    "name": "Wagner Pina"
+                },
+                {
+                    "number": "22",
+                    "name": "Pedro Carvalho"
+                },
+                {
+                    "number": "-",
+                    "name": "António Vital"
+                },
+                {
+                    "number": "5",
+                    "name": "Eliaquim Mangala"
+                },
+                {
+                    "number": "23",
+                    "name": "Pedro Álvaro"
+                },
+                {
+                    "number": "25",
+                    "name": "Felix Bacher"
+                },
+                {
+                    "number": "44",
+                    "name": "Kévin Boma"
+                },
+                {
+                    "number": "17",
+                    "name": "Fabrício Garcia"
+                },
+                {
+                    "number": "18",
+                    "name": "Gonçalo Costa"
+                },
+                {
+                    "number": "24",
+                    "name": "Pedro Amaral"
+                },
+                {
+                    "number": "3",
+                    "name": "Bernardo Vital"
+                },
+                {
+                    "number": "3",
+                    "name": "Ismael Sierra"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "-",
+                    "name": "Amadu Hashimi"
+                },
+                {
+                    "number": "-",
+                    "name": "Andrei Florea"
+                },
+                {
+                    "number": "6",
+                    "name": "Jandro Orellana"
+                },
+                {
+                    "number": "10",
+                    "name": "Jordan Holsgrove"
+                },
+                {
+                    "number": "12",
+                    "name": "João Carvalho"
+                },
+                {
+                    "number": "50",
+                    "name": "Martim Watts"
+                },
+                {
+                    "number": "7",
+                    "name": "Vinícius Zanocelo"
+                },
+                {
+                    "number": "26",
+                    "name": "Manga Foe-Ondoa"
+                },
+                {
+                    "number": "88",
+                    "name": "Xeka"
+                },
+                {
+                    "number": "4",
+                    "name": "Finn Dicke"
+                },
+                {
+                    "number": "21",
+                    "name": "Fran Pereira"
+                },
+                {
+                    "number": "8",
+                    "name": "Michel Costa"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "-",
+                    "name": "Miguel Salgado"
+                },
+                {
+                    "number": "49",
+                    "name": "Ruben Silva-Richards"
+                },
+                {
+                    "number": "-",
+                    "name": "Isnaba Mané"
+                },
+                {
+                    "number": "36",
+                    "name": "Gabriel Tavares"
+                },
+                {
+                    "number": "19",
+                    "name": "André Lacximicant"
+                },
+                {
+                    "number": "99",
+                    "name": "Rafik Guitane"
+                },
+                {
+                    "number": "9",
+                    "name": "Alejandro Marqués"
+                },
+                {
+                    "number": "92",
+                    "name": "Israel Salazar"
+                },
+                {
+                    "number": "14",
+                    "name": "Yanis Begraoui"
+                },
+                {
+                    "number": "11",
+                    "name": "Hélder Costa"
+                },
+                {
+                    "number": "89",
+                    "name": "André Gonçalves"
+                }
+            ]
+        }
+    },
+    "224": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "14",
+                    "name": "Bruno Varela"
+                },
+                {
+                    "number": "27",
+                    "name": "Charles Silva"
+                },
+                {
+                    "number": "47",
+                    "name": "João Oliveira"
+                },
+                {
+                    "number": "91",
+                    "name": "José Ribeiro"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "2",
+                    "name": "Miguel Maga"
+                },
+                {
+                    "number": "22",
+                    "name": "Hevertton Santos"
+                },
+                {
+                    "number": "76",
+                    "name": "Bruno Gaspar"
+                },
+                {
+                    "number": "96",
+                    "name": "Rodrigo Silva"
+                },
+                {
+                    "number": "3",
+                    "name": "Mikel Villanueva"
+                },
+                {
+                    "number": "4",
+                    "name": "Filipe Relvas"
+                },
+                {
+                    "number": "15",
+                    "name": "Óscar Rivas"
+                },
+                {
+                    "number": "24",
+                    "name": "Toni Borevkovic"
+                },
+                {
+                    "number": "13",
+                    "name": "João M. Mendes"
+                },
+                {
+                    "number": "22",
+                    "name": "Alberto Costa"
+                },
+                {
+                    "number": "4",
+                    "name": "Tomás Ribeiro"
+                },
+                {
+                    "number": "44",
+                    "name": "Jorge Fernandes"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "26",
+                    "name": "Hugo Nunes"
+                },
+                {
+                    "number": "8",
+                    "name": "Tomás Händel"
+                },
+                {
+                    "number": "92",
+                    "name": "Diogo Sousa"
+                },
+                {
+                    "number": "17",
+                    "name": "João Mendes"
+                },
+                {
+                    "number": "20",
+                    "name": "Samu Silva"
+                },
+                {
+                    "number": "5",
+                    "name": "Marco Cruz"
+                },
+                {
+                    "number": "10",
+                    "name": "Tiago Silva"
+                },
+                {
+                    "number": "16",
+                    "name": "Beni Mukendi"
+                },
+                {
+                    "number": "6",
+                    "name": "Manu Silva"
+                },
+                {
+                    "number": "28",
+                    "name": "Zé Carlos"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "11",
+                    "name": "Úmaro Embaló"
+                },
+                {
+                    "number": "18",
+                    "name": "Telmo Arcanjo"
+                },
+                {
+                    "number": "71",
+                    "name": "Gustavo Silva"
+                },
+                {
+                    "number": "7",
+                    "name": "Nélson Oliveira"
+                },
+                {
+                    "number": "9",
+                    "name": "Jesús Ramírez"
+                },
+                {
+                    "number": "86",
+                    "name": "Dieu Michel"
+                },
+                {
+                    "number": "21",
+                    "name": "Vando Félix"
+                },
+                {
+                    "number": "77",
+                    "name": "Nuno Santos"
+                },
+                {
+                    "number": "11",
+                    "name": "Kaio César"
+                },
+                {
+                    "number": "79",
+                    "name": "José Bica"
+                },
+                {
+                    "number": "11",
+                    "name": "Jota Silva"
+                },
+                {
+                    "number": "19",
+                    "name": "Ricardo Mangas"
+                }
+            ]
+        }
+    },
+    "4716": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Patrick Sequeira"
+                },
+                {
+                    "number": "22",
+                    "name": "Daniel Azevedo"
+                },
+                {
+                    "number": "33",
+                    "name": "Ricardo Batista"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "-",
+                    "name": "Khaly"
+                },
+                {
+                    "number": "18",
+                    "name": "André Geraldes"
+                },
+                {
+                    "number": "72",
+                    "name": "Gaizka Larrazabal"
+                },
+                {
+                    "number": "-",
+                    "name": "Bruno Alves"
+                },
+                {
+                    "number": "2",
+                    "name": "Duplexe Tchamba"
+                },
+                {
+                    "number": "3",
+                    "name": "Ruben Kluivert"
+                },
+                {
+                    "number": "4",
+                    "name": "João Goulart"
+                },
+                {
+                    "number": "6",
+                    "name": "José Fonte"
+                },
+                {
+                    "number": "44",
+                    "name": "Isaac Monteiro"
+                },
+                {
+                    "number": "5",
+                    "name": "Leonardo Lelo"
+                },
+                {
+                    "number": "11",
+                    "name": "Tiago Dias"
+                },
+                {
+                    "number": "12",
+                    "name": "Fahem Benaissa"
+                },
+                {
+                    "number": "19",
+                    "name": "Nermin Zolotic"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "-",
+                    "name": "Afonso Taborda"
+                },
+                {
+                    "number": "-",
+                    "name": "Kai Choy"
+                },
+                {
+                    "number": "-",
+                    "name": "Iyad Mohamed"
+                },
+                {
+                    "number": "17",
+                    "name": "Rafael Brito"
+                },
+                {
+                    "number": "89",
+                    "name": "Andrian Kraev"
+                },
+                {
+                    "number": "80",
+                    "name": "Pablo Roberto"
+                },
+                {
+                    "number": "14",
+                    "name": "Miguel Sousa"
+                },
+                {
+                    "number": "8",
+                    "name": "Telasco Segovia"
+                },
+                {
+                    "number": "16",
+                    "name": "Beni Mukendi"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "37",
+                    "name": "Samuel Ceita"
+                },
+                {
+                    "number": "-",
+                    "name": "Korede Osundina"
+                },
+                {
+                    "number": "-",
+                    "name": "Cauê dos Santos"
+                },
+                {
+                    "number": "9",
+                    "name": "Max Svensson"
+                },
+                {
+                    "number": "90",
+                    "name": "Cassiano"
+                },
+                {
+                    "number": "99",
+                    "name": "Clau Mendes"
+                },
+                {
+                    "number": "7",
+                    "name": "Nuno Moreira"
+                },
+                {
+                    "number": "20",
+                    "name": "Kiki Silva"
+                },
+                {
+                    "number": "29",
+                    "name": "Jérémy Livolant"
+                },
+                {
+                    "number": "52",
+                    "name": "Henrique Pereira"
+                },
+                {
+                    "number": "10",
+                    "name": "Raúl Blanco"
+                },
+                {
+                    "number": "77",
+                    "name": "Samuel Obeng"
+                },
+                {
+                    "number": "-",
+                    "name": "Andércio Malu"
+                }
+            ]
+        }
+    },
+    "227": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Gabriel Batista"
+                },
+                {
+                    "number": "12",
+                    "name": "Neneca"
+                },
+                {
+                    "number": "31",
+                    "name": "Denivys"
+                },
+                {
+                    "number": "94",
+                    "name": "Andrés Mehring"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "2",
+                    "name": "Diogo Calila"
+                },
+                {
+                    "number": "42",
+                    "name": "Lucas Soares"
+                },
+                {
+                    "number": "4",
+                    "name": "Pedro Pacheco"
+                },
+                {
+                    "number": "13",
+                    "name": "Luís Rocha"
+                },
+                {
+                    "number": "21",
+                    "name": "Frederico Venâncio"
+                },
+                {
+                    "number": "23",
+                    "name": "Sidney Lima"
+                },
+                {
+                    "number": "27",
+                    "name": "Guilherme Ramos"
+                },
+                {
+                    "number": "28",
+                    "name": "Habraão"
+                },
+                {
+                    "number": "3",
+                    "name": "Matheus Pereira"
+                },
+                {
+                    "number": "32",
+                    "name": "MT"
+                },
+                {
+                    "number": "14",
+                    "name": "Alysson"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "6",
+                    "name": "Adriano Firmino"
+                },
+                {
+                    "number": "8",
+                    "name": "Pedro Ferreira"
+                },
+                {
+                    "number": "41",
+                    "name": "Daniel Borges"
+                },
+                {
+                    "number": "10",
+                    "name": "Ricardinho"
+                },
+                {
+                    "number": "35",
+                    "name": "Serginho"
+                },
+                {
+                    "number": "77",
+                    "name": "Gustavo Klismahn"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "-",
+                    "name": "Gabriel Soto"
+                },
+                {
+                    "number": "-",
+                    "name": "Wendel Silva"
+                },
+                {
+                    "number": "-",
+                    "name": "Vital Maia"
+                },
+                {
+                    "number": "7",
+                    "name": "Matheusinho"
+                },
+                {
+                    "number": "70",
+                    "name": "Vinícius Lopes"
+                },
+                {
+                    "number": "-",
+                    "name": "Gustavo Veiga"
+                },
+                {
+                    "number": "17",
+                    "name": "João Costa"
+                },
+                {
+                    "number": "11",
+                    "name": "Gabriel Silva"
+                },
+                {
+                    "number": "19",
+                    "name": "Bruno Almeida"
+                },
+                {
+                    "number": "9",
+                    "name": "Alisson Safira"
+                },
+                {
+                    "number": "30",
+                    "name": "Rodrigo Varanda"
+                }
+            ]
+        }
+    },
+    "217": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "12",
+                    "name": "Tiago Sá"
+                },
+                {
+                    "number": "78",
+                    "name": "João Carvalho"
+                },
+                {
+                    "number": "91",
+                    "name": "Lukas Hornicek"
+                },
+                {
+                    "number": "1",
+                    "name": "Matheus Magalhães"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "2",
+                    "name": "Víctor Gómez"
+                },
+                {
+                    "number": "15",
+                    "name": "Paulo Oliveira"
+                },
+                {
+                    "number": "63",
+                    "name": "Rodrigo Beirão"
+                },
+                {
+                    "number": "72",
+                    "name": "André Ferreira"
+                },
+                {
+                    "number": "73",
+                    "name": "José Pedro"
+                },
+                {
+                    "number": "13",
+                    "name": "João Ferreira"
+                },
+                {
+                    "number": "3",
+                    "name": "Robson Bambu"
+                },
+                {
+                    "number": "4",
+                    "name": "Sikou Niakaté"
+                },
+                {
+                    "number": "26",
+                    "name": "Bright Arrey-Mbi"
+                },
+                {
+                    "number": "53",
+                    "name": "Jónatas Noro"
+                },
+                {
+                    "number": "19",
+                    "name": "Adrián Marín"
+                },
+                {
+                    "number": "55",
+                    "name": "Francisco Chissumba"
+                },
+                {
+                    "number": "17",
+                    "name": "Joe Mendes"
+                },
+                {
+                    "number": "5",
+                    "name": "Serdar Saatci"
+                },
+                {
+                    "number": "25",
+                    "name": "Yuri Ribeiro"
+                },
+                {
+                    "number": "27",
+                    "name": "Bartlomiej Wdowik"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "54",
+                    "name": "Guilherme Barbosa"
+                },
+                {
+                    "number": "22",
+                    "name": "Thiago Helguera"
+                },
+                {
+                    "number": "69",
+                    "name": "Uros Racic"
+                },
+                {
+                    "number": "20",
+                    "name": "Ismaël Gharbi"
+                },
+                {
+                    "number": "6",
+                    "name": "Vitor Carvalho"
+                },
+                {
+                    "number": "8",
+                    "name": "João Moutinho"
+                },
+                {
+                    "number": "16",
+                    "name": "Rodrigo Zalazar"
+                },
+                {
+                    "number": "29",
+                    "name": "Gorby Baptiste"
+                },
+                {
+                    "number": "50",
+                    "name": "Diego Rodrigues"
+                },
+                {
+                    "number": "10",
+                    "name": "André Horta"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "92",
+                    "name": "Rodrigo Macedo"
+                },
+                {
+                    "number": "11",
+                    "name": "Roger Fernandes"
+                },
+                {
+                    "number": "21",
+                    "name": "Ricardo Horta"
+                },
+                {
+                    "number": "70",
+                    "name": "Rodrigo Silva"
+                },
+                {
+                    "number": "80",
+                    "name": "João Vasconcelos"
+                },
+                {
+                    "number": "9",
+                    "name": "Amine El Ouazzani"
+                },
+                {
+                    "number": "39",
+                    "name": "Fran Navarro"
+                },
+                {
+                    "number": "59",
+                    "name": "Yan Said"
+                },
+                {
+                    "number": "77",
+                    "name": "Gabri Martínez"
+                },
+                {
+                    "number": "27",
+                    "name": "Rafik Guitane"
+                },
+                {
+                    "number": "23",
+                    "name": "Simon Banza"
+                },
+                {
+                    "number": "90",
+                    "name": "Roberto Fernández"
+                },
+                {
+                    "number": "7",
+                    "name": "Bruma"
+                },
+                {
+                    "number": "33",
+                    "name": "João Marques"
+                }
+            ]
+        }
+    },
+    "212": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "14",
+                    "name": "Cláudio Ramos"
+                },
+                {
+                    "number": "51",
+                    "name": "Diogo Fernandes"
+                },
+                {
+                    "number": "91",
+                    "name": "Gonçalo Ribeiro"
+                },
+                {
+                    "number": "94",
+                    "name": "Samuel Portugal"
+                },
+                {
+                    "number": "99",
+                    "name": "Diogo Costa"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "23",
+                    "name": "João Mário"
+                },
+                {
+                    "number": "52",
+                    "name": "Martim Fernandes"
+                },
+                {
+                    "number": "3",
+                    "name": "Tiago Djaló"
+                },
+                {
+                    "number": "4",
+                    "name": "Otávio Ataíde"
+                },
+                {
+                    "number": "5",
+                    "name": "Iván Marcano"
+                },
+                {
+                    "number": "24",
+                    "name": "Nehuén Pérez"
+                },
+                {
+                    "number": "73",
+                    "name": "Gabriel Brás"
+                },
+                {
+                    "number": "97",
+                    "name": "Zé Pedro"
+                },
+                {
+                    "number": "12",
+                    "name": "Zaidu Sanusi"
+                },
+                {
+                    "number": "74",
+                    "name": "Francisco Moura"
+                },
+                {
+                    "number": "84",
+                    "name": "Martim Cunha"
+                },
+                {
+                    "number": "26",
+                    "name": "David Carmo"
+                },
+                {
+                    "number": "18",
+                    "name": "Wendell"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "8",
+                    "name": "Marko Grujić"
+                },
+                {
+                    "number": "22",
+                    "name": "Alan Varela"
+                },
+                {
+                    "number": "25",
+                    "name": "Tomás Pérez"
+                },
+                {
+                    "number": "88",
+                    "name": "Domingos Andrade"
+                },
+                {
+                    "number": "10",
+                    "name": "Fábio Vieira"
+                },
+                {
+                    "number": "20",
+                    "name": "André Franco"
+                },
+                {
+                    "number": "6",
+                    "name": "Stephen Eustáquio"
+                },
+                {
+                    "number": "15",
+                    "name": "Vasco Sousa"
+                },
+                {
+                    "number": "68",
+                    "name": "André Oliveira"
+                },
+                {
+                    "number": "92",
+                    "name": "João Teixeira"
+                },
+                {
+                    "number": "16",
+                    "name": "Nico González"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "7",
+                    "name": "William Gomes"
+                },
+                {
+                    "number": "70",
+                    "name": "Gonçalo Borges"
+                },
+                {
+                    "number": "9",
+                    "name": "Samu Aghehowa"
+                },
+                {
+                    "number": "19",
+                    "name": "Danny Namaso"
+                },
+                {
+                    "number": "27",
+                    "name": "Deniz Gül"
+                },
+                {
+                    "number": "11",
+                    "name": "Pepê"
+                },
+                {
+                    "number": "49",
+                    "name": "Gonçalo Sousa"
+                },
+                {
+                    "number": "86",
+                    "name": "Rodrigo Mora"
+                },
+                {
+                    "number": "21",
+                    "name": "Fran Navarro"
+                },
+                {
+                    "number": "29",
+                    "name": "Toni Martínez"
+                },
+                {
+                    "number": "30",
+                    "name": "Evanilson"
+                },
+                {
+                    "number": "13",
+                    "name": "Wenderson Galeno"
+                },
+                {
+                    "number": "17",
+                    "name": "Iván Jaime"
+                }
+            ]
+        }
+    },
+    "211": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Anatoliy Trubin"
+                },
+                {
+                    "number": "24",
+                    "name": "Samuel Soares"
+                },
+                {
+                    "number": "74",
+                    "name": "André Gomes"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "6",
+                    "name": "Alexander Bah"
+                },
+                {
+                    "number": "71",
+                    "name": "Leandro Santos"
+                },
+                {
+                    "number": "4",
+                    "name": "António Silva"
+                },
+                {
+                    "number": "30",
+                    "name": "Nicolás Otamendi"
+                },
+                {
+                    "number": "44",
+                    "name": "Tomás Araújo"
+                },
+                {
+                    "number": "81",
+                    "name": "Adrian Bajrami"
+                },
+                {
+                    "number": "55",
+                    "name": "João Fonseca"
+                },
+                {
+                    "number": "3",
+                    "name": "Álvaro Carreras"
+                },
+                {
+                    "number": "26",
+                    "name": "Samuel Dahl"
+                },
+                {
+                    "number": "28",
+                    "name": "Issa Kaboré"
+                },
+                {
+                    "number": "5",
+                    "name": "Morato"
+                },
+                {
+                    "number": "37",
+                    "name": "Jan-Niklas Beste"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "16",
+                    "name": "Manu Silva"
+                },
+                {
+                    "number": "61",
+                    "name": "Florentino Luís"
+                },
+                {
+                    "number": "60",
+                    "name": "Nuno Félix"
+                },
+                {
+                    "number": "10",
+                    "name": "Orkun Kökçü"
+                },
+                {
+                    "number": "84",
+                    "name": "João Rego"
+                },
+                {
+                    "number": "8",
+                    "name": "Fredrik Aursnes"
+                },
+                {
+                    "number": "18",
+                    "name": "Leandro Barreiro"
+                },
+                {
+                    "number": "85",
+                    "name": "Renato Sanches"
+                },
+                {
+                    "number": "86",
+                    "name": "Diogo Prioste"
+                },
+                {
+                    "number": "20",
+                    "name": "João Mário"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "11",
+                    "name": "Ángel Di María"
+                },
+                {
+                    "number": "25",
+                    "name": "Gianluca Prestianni"
+                },
+                {
+                    "number": "47",
+                    "name": "Tiago Gouveia"
+                },
+                {
+                    "number": "9",
+                    "name": "Arthur Cabral"
+                },
+                {
+                    "number": "14",
+                    "name": "Vangelis Pavlidis"
+                },
+                {
+                    "number": "19",
+                    "name": "Andrea Belotti"
+                },
+                {
+                    "number": "89",
+                    "name": "Gustavo Varela"
+                },
+                {
+                    "number": "17",
+                    "name": "Kerem Aktürkoğlu"
+                },
+                {
+                    "number": "21",
+                    "name": "Andreas Schjelderup"
+                },
+                {
+                    "number": "27",
+                    "name": "Bruma"
+                },
+                {
+                    "number": "7",
+                    "name": "Zeki Amdouni"
+                },
+                {
+                    "number": "32",
+                    "name": "Benjamín Rollheiser"
+                },
+                {
+                    "number": "36",
+                    "name": "Marcos Leonardo"
+                },
+                {
+                    "number": "77",
+                    "name": "Gerson Sousa"
+                }
+            ]
+        }
+    },
+    "228": {
+        "pos": {
+            "goalkeepes": [
+                {
+                    "number": "1",
+                    "name": "Franco Israel"
+                },
+                {
+                    "number": "24",
+                    "name": "Rui Silva"
+                },
+                {
+                    "number": "41",
+                    "name": "Diego Callai"
+                },
+                {
+                    "number": "51",
+                    "name": "Diogo Pinto"
+                },
+                {
+                    "number": "13",
+                    "name": "Vladan Kovačević"
+                }
+            ],
+            "defesa": [
+                {
+                    "number": "22",
+                    "name": "Iván Fresneda"
+                },
+                {
+                    "number": "47",
+                    "name": "Ricardo Esgaio"
+                },
+                {
+                    "number": "3",
+                    "name": "Jeremiah St. Juste"
+                },
+                {
+                    "number": "6",
+                    "name": "Zeno Debast"
+                },
+                {
+                    "number": "25",
+                    "name": "Gonçalo Inácio"
+                },
+                {
+                    "number": "26",
+                    "name": "Ousmane Diomande"
+                },
+                {
+                    "number": "43",
+                    "name": "João Muniz"
+                },
+                {
+                    "number": "54",
+                    "name": "Bruno Ramos"
+                },
+                {
+                    "number": "66",
+                    "name": "Miguel Alves"
+                },
+                {
+                    "number": "72",
+                    "name": "Eduardo Quaresma"
+                },
+                {
+                    "number": "95",
+                    "name": "Lucas Taibo"
+                },
+                {
+                    "number": "2",
+                    "name": "Matheus Reis"
+                },
+                {
+                    "number": "11",
+                    "name": "Nuno Santos"
+                },
+                {
+                    "number": "20",
+                    "name": "Maxi Araújo"
+                },
+                {
+                    "number": "71",
+                    "name": "Denilson Santos"
+                }
+            ],
+            "médio": [
+                {
+                    "number": "42",
+                    "name": "Morten Hjulmand"
+                },
+                {
+                    "number": "50",
+                    "name": "Alexandre Brito"
+                },
+                {
+                    "number": "73",
+                    "name": "Eduardo Felicíssimo"
+                },
+                {
+                    "number": "81",
+                    "name": "Henrique Arreiol"
+                },
+                {
+                    "number": "5",
+                    "name": "Hidemasa Morita"
+                },
+                {
+                    "number": "23",
+                    "name": "Daniel Bragança"
+                },
+                {
+                    "number": "52",
+                    "name": "João Simões"
+                },
+                {
+                    "number": "14",
+                    "name": "Dário Essugo"
+                },
+                {
+                    "number": "28",
+                    "name": "Mateus Fernandes"
+                }
+            ],
+            "avançado": [
+                {
+                    "number": "17",
+                    "name": "Francisco Trincão"
+                },
+                {
+                    "number": "21",
+                    "name": "Geny Catamo"
+                },
+                {
+                    "number": "78",
+                    "name": "Mauro Couto"
+                },
+                {
+                    "number": "90",
+                    "name": "Afonso Moreira"
+                },
+                {
+                    "number": "9",
+                    "name": "Viktor Gyökeres"
+                },
+                {
+                    "number": "19",
+                    "name": "Conrad Harder"
+                },
+                {
+                    "number": "82",
+                    "name": "Gabriel Silva"
+                },
+                {
+                    "number": "86",
+                    "name": "Rafael Nel"
+                },
+                {
+                    "number": "8",
+                    "name": "Pedro Gonçalves"
+                },
+                {
+                    "number": "30",
+                    "name": "Biel Teixeira"
+                },
+                {
+                    "number": "57",
+                    "name": "Geovany Quenda"
+                },
+                {
+                    "number": "80",
+                    "name": "Luís Gomes"
+                },
+                {
+                    "number": "10",
+                    "name": "Marcus Edwards"
+                },
+                {
+                    "number": "91",
+                    "name": "Rodrigo Ribeiro"
+                }
+            ]
+        }
+    }
+}
