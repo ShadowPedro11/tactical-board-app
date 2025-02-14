@@ -9,6 +9,15 @@
           {{ team.team.name }}
         </option>
       </select>
+      <!-- Uniform selector for Team A -->
+      <div class="uniform-selector">
+        <label for="uniformSelectA">Uniform:</label>
+        <select id="uniformSelectA" (change)="onUniformSelect('A', +$any($event.target).value)">
+          <option *ngFor="let uniform of (selectedTeamA ? teamUniforms[selectedTeamA.team.id] : [])" [value]="uniform.id">
+            {{ uniform.name }}
+          </option>
+        </select>
+      </div>
     </div>
     <!-- Formation selectors (Purple) -->
     <div class="formation-selectors purple">
@@ -34,6 +43,15 @@
           {{ team.team.name }}
         </option>
       </select>
+      <!-- Uniform selector for Team B -->
+      <div class="uniform-selector">
+        <label for="uniformSelectB">Uniform:</label>
+        <select id="uniformSelectB" (change)="onUniformSelect('B', +$any($event.target).value)">
+          <option *ngFor="let uniform of (selectedTeamB ? teamUniforms[selectedTeamB.team.id] : [])" [value]="uniform.id">
+            {{ uniform.name }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 
@@ -65,7 +83,7 @@
              class="token token-a"
              [style.left.%]="token.x"
              [style.top.%]="token.y"
-             [style.background-color]="getTokenColor(token)"
+             [style.background]="getTokenBackground(token)"
              (mousedown)="onTokenMouseDown(token, $event)"
              (contextmenu)="onTokenRightClick(token, $event)">
           <div class="token-content">
@@ -79,7 +97,7 @@
              class="token token-b"
              [style.left.%]="token.x"
              [style.top.%]="token.y"
-             [style.background-color]="getTokenColor(token)"
+             [style.background]="getTokenBackground(token)"
              (mousedown)="onTokenMouseDown(token, $event)"
              (contextmenu)="onTokenRightClick(token, $event)">
           <div class="token-content">
