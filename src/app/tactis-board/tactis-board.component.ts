@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Team, TeamService } from './team.service';
 import { formations } from './formations';
+import { teamColors } from './team-colors'; // Import the team colors map
 
 interface PlayerToken {
   id: number;
@@ -50,7 +51,7 @@ export class TactisBoardComponent implements OnInit {
   constructor(private teamService: TeamService) {}
 
   ngOnInit(): void {
-    // Load teams from your local Portugal.json file via TeamService
+    // Load teams from local Portugal.json via TeamService
     this.teamService.getTeams().subscribe({
       next: (data) => (this.teams = data),
       error: (err) => console.error('Error fetching teams:', err)
@@ -96,6 +97,17 @@ export class TactisBoardComponent implements OnInit {
     }
   }
 
+  // Helper method to get a token's background color based on the selected team.
+  getTokenColor(token: PlayerToken): string {
+    if (token.team === 'A' && this.selectedTeamA) {
+      return teamColors[this.selectedTeamA.team.id] || 'rgba(255, 0, 0, 0.8)';
+    } else if (token.team === 'B' && this.selectedTeamB) {
+      return teamColors[this.selectedTeamB.team.id] || 'rgba(0, 0, 255, 0.8)';
+    }
+    // Default colors if no team is selected.
+    return token.team === 'A' ? 'rgba(255, 0, 0, 0.8)' : 'rgba(0, 0, 255, 0.8)';
+  }
+
   // ---------------------------
   // DRAG & DROP IMPLEMENTATION
   // ---------------------------
@@ -104,12 +116,9 @@ export class TactisBoardComponent implements OnInit {
   onTokenMouseDown(token: PlayerToken, event: MouseEvent): void {
     if (event.button !== 0) return; // Only react to left-button
     event.stopPropagation();
-    // Get the container's bounding rectangle.
     const containerRect = this.container.nativeElement.getBoundingClientRect();
-    // Calculate token's current pixel position based on its percentage.
     const tokenPixelX = (token.x / 100) * containerRect.width;
     const tokenPixelY = (token.y / 100) * containerRect.height;
-    // Calculate the offset from the mouse position to the token's top-left corner.
     this.dragOffsetX = event.clientX - (containerRect.left + tokenPixelX);
     this.dragOffsetY = event.clientY - (containerRect.top + tokenPixelY);
     this.draggingToken = token;
@@ -119,10 +128,8 @@ export class TactisBoardComponent implements OnInit {
   onFieldMouseMove(event: MouseEvent): void {
     if (!this.draggingToken) return;
     const containerRect = this.container.nativeElement.getBoundingClientRect();
-    // Calculate new pixel coordinates for the token's top-left corner.
     const newPixelX = event.clientX - containerRect.left - this.dragOffsetX;
     const newPixelY = event.clientY - containerRect.top - this.dragOffsetY;
-    // Update token position in percentages.
     this.draggingToken.x = (newPixelX / containerRect.width) * 100;
     this.draggingToken.y = (newPixelY / containerRect.height) * 100;
   }
@@ -132,18 +139,13 @@ export class TactisBoardComponent implements OnInit {
     this.draggingToken = null;
   }
 
-  // ---------------------------
-  // END DRAG & DROP IMPLEMENTATION
-  // ---------------------------
-
   // (Optional) If the user clicks on the field and a token is selected, update its position.
   onFieldClick(event: MouseEvent): void {
     if (this.draggingToken) return; // Ignore if dragging is in progress.
-    const field = event.currentTarget as HTMLElement;
-    const rect = field.getBoundingClientRect();
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const clickY = event.clientY - rect.top;
-    // (Optional) Update the token position if desired.
+    // (Optional) Update token position if desired.
   }
 
   // Right-click on a token to edit its number and name.

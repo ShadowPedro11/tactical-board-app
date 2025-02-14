@@ -65,6 +65,7 @@
              class="token token-a"
              [style.left.%]="token.x"
              [style.top.%]="token.y"
+             [style.background-color]="getTokenColor(token)"
              (mousedown)="onTokenMouseDown(token, $event)"
              (contextmenu)="onTokenRightClick(token, $event)">
           <div class="token-content">
@@ -78,6 +79,7 @@
              class="token token-b"
              [style.left.%]="token.x"
              [style.top.%]="token.y"
+             [style.background-color]="getTokenColor(token)"
              (mousedown)="onTokenMouseDown(token, $event)"
              (contextmenu)="onTokenRightClick(token, $event)">
           <div class="token-content">
