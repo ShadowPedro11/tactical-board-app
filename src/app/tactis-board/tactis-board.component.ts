@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Team, TeamService } from './team.service';
 import { formations } from './formations';
 import { teamUniforms, Uniform } from './uniforms';
+import squadsData from './players.json';
 
 interface PlayerToken {
   id: number;
@@ -55,6 +56,13 @@ export class TactisBoardComponent implements OnInit {
 
   // For token layout – assume "free" is the default.
   tokenLayout: 'free' | 'vertical' | 'horizontal' = 'free';
+
+  // New: control for showing the squad selection modal.
+  showSquadSelector: boolean = false;
+  tokenToAssign: PlayerToken | null = null;
+
+  // Squad data loaded from JSON
+  squads: any = squadsData;
 
   constructor(private teamService: TeamService) {}
 
@@ -204,16 +212,42 @@ export class TactisBoardComponent implements OnInit {
     if (this.draggingToken) return;
   }
 
+  // NEW: Instead of prompting on right-click, show a squad selector modal.
   onTokenRightClick(token: PlayerToken, event: MouseEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    const newNumber = prompt("Enter player's number:", token.number || '');
-    if (newNumber !== null) {
-      token.number = newNumber;
+    // Save which token we want to update.
+    this.tokenToAssign = token;
+    // Show the modal.
+    this.showSquadSelector = true;
+  }
+
+  // Helper: Aggregate squad players for a given team id.
+  getSquadForTeam(teamId: number): any[] {
+    const squadForTeam = this.squads[teamId];
+    if (!squadForTeam || !squadForTeam.pos) return [];
+    const pos = squadForTeam.pos;
+    return [
+      ...(pos.goalkeepes || []),
+      ...(pos.defesa || []),
+      ...(pos["médio"] || []),
+      ...(pos.avançado || [])
+    ];
+  }
+
+  // Called when the user selects a player from the modal.
+  assignPlayerToToken(player: any): void {
+    if (this.tokenToAssign) {
+      this.tokenToAssign.number = player.number;
+      this.tokenToAssign.name = player.name;
     }
-    const newName = prompt("Enter player's name:", token.name || '');
-    if (newName !== null) {
-      token.name = newName;
-    }
+    // Hide the modal.
+    this.showSquadSelector = false;
+    this.tokenToAssign = null;
+  }
+
+  closeSquadSelector(): void {
+    this.showSquadSelector = false;
+    this.tokenToAssign = null;
   }
 }

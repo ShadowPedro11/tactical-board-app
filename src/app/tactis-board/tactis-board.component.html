@@ -55,6 +55,30 @@
     </div>
   </div>
 
+  <div class="modal" *ngIf="showSquadSelector">
+    <div class="modal-content">
+      <h3>Select a Player</h3>
+      <div *ngIf="tokenToAssign">
+        <!-- Determine which team the token belongs to and load squad accordingly -->
+        <div *ngIf="tokenToAssign.team === 'A' && selectedTeamA">
+          <div *ngFor="let player of getSquadForTeam(selectedTeamA.team.id)">
+            <button (click)="assignPlayerToToken(player)">
+              {{ player.name }} ({{ player.number }})
+            </button>
+          </div>
+        </div>
+        <div *ngIf="tokenToAssign.team === 'B' && selectedTeamB">
+          <div *ngFor="let player of getSquadForTeam(selectedTeamB.team.id)">
+            <button (click)="assignPlayerToToken(player)">
+              {{ player.name }} ({{ player.number }})
+            </button>
+          </div>
+        </div>
+      </div>
+      <button class="close" (click)="closeSquadSelector()">Cancel</button>
+    </div>
+  </div>
+
   <!-- Main area: red team pictures on sides with the green field in the center -->
   <div class="main">
     <!-- Left Team Picture (Red) -->
