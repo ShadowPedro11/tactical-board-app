@@ -153,9 +153,16 @@ export class TactisBoardComponent implements OnInit {
       }
     } else if (uniform.type === 'horizontal') {
       // Create horizontal stripes.
-      if (uniform.colors.length >= 2) {
+      if(uniform.colors.length == 3) {
+        return `repeating-linear-gradient(180deg, 
+          ${uniform.colors[0]} 0%, ${uniform.colors[0]} 33%, 
+          ${uniform.colors[1]} 33%, ${uniform.colors[1]} 66%, 
+          ${uniform.colors[2]} 66%, ${uniform.colors[2]} 100%)`;
+      } else if (uniform.colors.length >= 2) {
         return `linear-gradient(0deg, ${uniform.colors[0]} 50%, ${uniform.colors[1]} 50%)`;
       }
+    } else if (uniform.type === 'dual') {
+      return `linear-gradient(90deg, ${uniform.colors[0]} 50%, ${uniform.colors[1]} 50%)`;
     }
     return uniform.colors[0];
   }
