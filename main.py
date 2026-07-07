@@ -92,13 +92,14 @@ def brightness(color):
 # Player token
 # ---------------------------------------------------------------------------
 class Player:
-    def __init__(self, x_m, y_m, number, name, is_gk, side):
+    def __init__(self, x_m, y_m, number, name, position, side):
         self.x_m = x_m
         self.y_m = y_m
         self.home_m = (x_m, y_m)
         self.number = number
         self.name = name
-        self.is_gk = is_gk
+        self.position = position
+        self.is_gk = position == "GK"
         self.side = side
         self.radius_px = int(PLAYER_RADIUS_M * SCALE)
 
@@ -166,28 +167,61 @@ class TeamSide:
     def _mirror(self, x_m):
         return mirror_x(x_m) if self.x_dir == -1 else x_m
 
+    def formation_position_counts(self, formation_name=None):
+        """Return how many DF/MF/FW players the formation needs.
+
+        Examples:
+          4-4-2     -> 4 DF, 4 MF, 2 FW
+          4-2-3-1   -> 4 DF, 5 MF, 1 FW
+        """
+        rows = FORMATIONS[formation_name or self.formation_name]
+        return {
+            "DF": rows[0],
+            "MF": sum(rows[1:-1]),
+            "FW": rows[-1],
+        }
+
+    def players_for_formation(self, formation_name=None):
+        """Pick outfield players by position, matching the selected formation."""
+        squad = self.team["squad"]
+        counts = self.formation_position_counts(formation_name)
+
+        picked = []
+        used_numbers = set()
+
+        for position in ("DF", "MF", "FW"):
+            position_players = [p for p in squad if p["position"] == position]
+            for pdata in position_players[:counts[position]]:
+                picked.append(pdata)
+                used_numbers.add(pdata["number"])
+
+        # Fallback: if a squad does not have enough players in one position,
+        # fill the missing places with any unused outfield players.
+        needed = 10 - len(picked)
+        if needed > 0:
+            fallback = [
+                p for p in squad
+                if p["position"] != "GK" and p["number"] not in used_numbers
+            ]
+            picked.extend(fallback[:needed])
+
+        return picked[:10]
+
     def build_players_from_squad(self):
         squad = self.team["squad"]
         gk = next(p for p in squad if p["position"] == "GK")
-        outfield = [p for p in squad if p["position"] != "GK"][:10]
+        outfield = self.players_for_formation(self.formation_name)
 
         self.players = []
         gx, gy = gk_slot()
-        self.players.append(Player(self._mirror(gx), gy, gk["number"], gk["name"], True, self))
+        self.players.append(Player(self._mirror(gx), gy, gk["number"], gk["name"], gk["position"], self))
 
         for (x, y), pdata in zip(outfield_slots(self.formation_name), outfield):
-            self.players.append(Player(self._mirror(x), y, pdata["number"], pdata["name"], False, self))
+            self.players.append(Player(self._mirror(x), y, pdata["number"], pdata["name"], pdata["position"], self))
 
     def apply_formation(self, formation_name):
         self.formation_name = formation_name
-        slots = outfield_slots(formation_name)
-        for (x, y), pl in zip(slots, self.players[1:]):
-            xm = self._mirror(x)
-            pl.x_m, pl.y_m = xm, y
-            pl.home_m = (xm, y)
-        gk = self.players[0]
-        gx, gy = gk_slot()
-        gk.home_m = (self._mirror(gx), gy)
+        self.build_players_from_squad()
 
     def set_team(self, team):
         self.team = team
@@ -344,7 +378,16 @@ def build_formation_modal(side):
 
 
 def build_player_modal(side, player):
-    squad_sorted = sorted(side.team["squad"], key=lambda p: (p["position"] != "GK", p["number"]))
+    # When clicking a token, show players for that token's position first.
+    # Example: clicking a DF in a 4-4-2 shows defenders first.
+    same_position = [p for p in side.team["squad"] if p["position"] == player.position]
+    other_positions = [p for p in side.team["squad"] if p["position"] != player.position]
+
+    squad_sorted = (
+        sorted(same_position, key=lambda p: p["number"]) +
+        sorted(other_positions, key=lambda p: (p["position"] != "GK", p["position"], p["number"]))
+    )
+
     options = [(f"#{p['number']} {p['name']} ({p['position']})", p) for p in squad_sorted]
     return Modal("player", side, options, player=player)
 
@@ -475,6 +518,7 @@ async def main():
                         elif modal.kind == "player":
                             modal.player.number = value["number"]
                             modal.player.name = value["name"]
+                            modal.player.position = value["position"]
                             modal.player.is_gk = value["position"] == "GK"
                         modal = None
                     continue
