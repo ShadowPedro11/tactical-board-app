@@ -24,9 +24,9 @@ How the responsiveness works
   page dispatches a canvas resize, pygame receives a `VIDEORESIZE` event
   and we rebuild the layout, fonts, and texture cache to match.
 
-Controls (unchanged):
+Controls:
   - Left click + drag a player token to move it.
-  - Left click (no drag) a player token to pick a different squad player.
+  - Right click a player token to pick a different squad player.
   - Use the buttons above the pitch to change team / kit / formation.
   - Press R to reset both teams to their formation's default positions.
   - Press ESC to quit (desktop only).
@@ -368,10 +368,14 @@ def build_buttons(side_a, side_b):
 
 
 class Modal:
-    """A centered list of clickable options, with a translucent backdrop.
-    Sized/centered from LAYOUT so it works on small screens too."""
+    """A centered, scrollable list of clickable options.
 
-    def __init__(self, kind, side, options, player=None):
+    The original modal created every row at a fixed y position, so teams with
+    large squads could draw rows below the panel. This version keeps the rows
+    clipped inside the panel and lets the user scroll the list.
+    """
+
+    def __init__(self, kind, side, options, player=None, scroll_y=0):
         self.kind = kind
         self.side = side
         self.options = options
@@ -379,20 +383,22 @@ class Modal:
 
         fs = LAYOUT.font_scale()
         row_h = max(24, int(30 * fs))
-        width = max(240, min(int(LAYOUT.window_w * 0.85), 340))
+        width = max(260, min(int(LAYOUT.window_w * 0.85), 420))
         height = min(int(LAYOUT.window_h * 0.85), 60 + row_h * len(options))
         self.rect = pygame.Rect(0, 0, width, height)
         self.rect.center = (LAYOUT.window_w // 2, LAYOUT.window_h // 2)
 
         self.row_h = row_h
-        self.rows = []
-        y = self.rect.y + 50
-        for label, value in options:
-            row_rect = pygame.Rect(self.rect.x + 10, y, self.rect.width - 20, row_h - 4)
-            self.rows.append((row_rect, label, value))
-            y += row_h
-
         self.close_rect = pygame.Rect(self.rect.right - 34, self.rect.y + 8, 24, 24)
+        self.list_rect = pygame.Rect(
+            self.rect.x + 10,
+            self.rect.y + 50,
+            self.rect.width - 20,
+            self.rect.height - 60,
+        )
+        self.content_h = self.row_h * len(self.options)
+        self.max_scroll = max(0, self.content_h - self.list_rect.height)
+        self.scroll_y = max(0, min(int(scroll_y), self.max_scroll))
 
     def title(self):
         return {
@@ -401,6 +407,20 @@ class Modal:
             "formation": "Choose formation",
             "player": "Choose player",
         }[self.kind]
+
+    def _row_rect_for_index(self, index):
+        y = self.list_rect.y + index * self.row_h - self.scroll_y
+        return pygame.Rect(self.list_rect.x, y, self.list_rect.width, self.row_h - 4)
+
+    def _render_ellipsized(self, font, text, color, max_w):
+        if font.size(text)[0] <= max_w:
+            return font.render(text, True, color)
+
+        ellipsis = "..."
+        clipped = text
+        while clipped and font.size(clipped + ellipsis)[0] > max_w:
+            clipped = clipped[:-1]
+        return font.render((clipped + ellipsis) if clipped else ellipsis, True, color)
 
     def draw(self, surface, fonts, mouse_pos):
         overlay = pygame.Surface((LAYOUT.window_w, LAYOUT.window_h), pygame.SRCALPHA)
@@ -417,23 +437,60 @@ class Modal:
         x_surf = fonts["modal_row"].render("X", True, (240, 240, 240))
         surface.blit(x_surf, x_surf.get_rect(center=self.close_rect.center))
 
-        for row_rect, label, _value in self.rows:
-            hovered = row_rect.collidepoint(mouse_pos)
+        old_clip = surface.get_clip()
+        surface.set_clip(self.list_rect)
+
+        first_visible = max(0, self.scroll_y // self.row_h)
+        last_visible = min(
+            len(self.options),
+            (self.scroll_y + self.list_rect.height) // self.row_h + 2,
+        )
+
+        for index in range(first_visible, last_visible):
+            label, _value = self.options[index]
+            row_rect = self._row_rect_for_index(index)
+            hovered = row_rect.collidepoint(mouse_pos) and self.list_rect.collidepoint(mouse_pos)
             if hovered:
                 pygame.draw.rect(surface, COLOR_MODAL_ROW_HOVER, row_rect, border_radius=4)
-            label_surf = fonts["modal_row"].render(label, True, COLOR_MODAL_TEXT)
+
+            label_surf = self._render_ellipsized(
+                fonts["modal_row"],
+                label,
+                COLOR_MODAL_TEXT,
+                row_rect.width - 16,
+            )
             surface.blit(label_surf, (row_rect.x + 8, row_rect.centery - label_surf.get_height() // 2))
+
+        surface.set_clip(old_clip)
+
+        if self.max_scroll > 0:
+            track = pygame.Rect(self.rect.right - 9, self.list_rect.y, 4, self.list_rect.height)
+            pygame.draw.rect(surface, (70, 76, 72), track, border_radius=2)
+            thumb_h = max(24, int(self.list_rect.height * self.list_rect.height / self.content_h))
+            thumb_y = self.list_rect.y + int((self.list_rect.height - thumb_h) * self.scroll_y / self.max_scroll)
+            thumb = pygame.Rect(track.x, thumb_y, track.width, thumb_h)
+            pygame.draw.rect(surface, (150, 156, 152), thumb, border_radius=2)
+
+    def handle_scroll(self, wheel_y):
+        if self.max_scroll <= 0:
+            return
+        self.scroll_y = max(
+            0,
+            min(self.max_scroll, self.scroll_y - wheel_y * self.row_h * 3),
+        )
 
     def handle_click(self, pos):
         if self.close_rect.collidepoint(pos):
             return "close", None
-        for row_rect, _label, value in self.rows:
-            if row_rect.collidepoint(pos):
-                return "select", value
+
+        if self.list_rect.collidepoint(pos):
+            index = (pos[1] - self.list_rect.y + self.scroll_y) // self.row_h
+            if 0 <= index < len(self.options):
+                return "select", self.options[int(index)][1]
+
         if not self.rect.collidepoint(pos):
             return "close", None
         return None, None
-
 
 def kit_option_label(kit):
     return f"{kit['name']} ({kit['pattern']})"
@@ -594,6 +651,12 @@ async def main():
                     side_a.reset_positions()
                     side_b.reset_positions()
 
+            elif event.type == pygame.MOUSEWHEEL and modal is not None:
+                modal.handle_scroll(event.y)
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and modal is not None and event.button in (4, 5):
+                modal.handle_scroll(1 if event.button == 4 else -1)
+
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if modal is not None:
                     action, value = modal.handle_click(event.pos)
@@ -635,10 +698,15 @@ async def main():
                         drag_moved = False
                         break
 
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3 and modal is None:
+                for p in reversed(side_a.players + side_b.players):
+                    if p.contains_point(*event.pos):
+                        modal = build_player_modal(p.side, p)
+                        dragged_player = None
+                        break
+
             elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 if dragged_player is not None:
-                    if not drag_moved:
-                        modal = build_player_modal(dragged_player.side, dragged_player)
                     dragged_player = None
 
             elif event.type == pygame.MOUSEMOTION:
@@ -657,7 +725,7 @@ async def main():
             b.draw(screen, fonts["button"], mouse_pos)
 
         hint = fonts["hint"].render(
-            "Drag = move  |  Click = pick player  |  R = reset positions  |  Esc = quit",
+            "Left drag = move  |  Right click = pick player  |  R = reset positions  |  Esc = quit",
             True, (230, 230, 230))
         screen.blit(hint, (LAYOUT.margin_side, LAYOUT.window_h - hint.get_height() - 6))
 
