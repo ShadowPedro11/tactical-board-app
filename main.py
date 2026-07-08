@@ -1,20 +1,30 @@
 """
-Football Tactical Board
-------------------------
-Interactive tactics board built with pygame, sized to real football pitch
-dimensions (105m x 68m per IFAB Laws of the Game). Deployed to the web via
-pygbag (compiles to WASM), which is why the app runs an async main loop.
+Football Tactical Board (responsive)
+-------------------------------------
+Same app as before, but the pitch, UI panel, fonts and player tokens now all
+scale to the actual window size instead of a fixed 1200x830-ish canvas. This
+makes it work on any monitor size, in a resized browser tab (pygbag), and on
+narrow phone screens.
 
-Features:
-  - Real-size pitch with standard markings.
-  - Two teams, each independently: choose the team (from an embedded
-    "database" of squads), choose a uniform/kit, choose a formation.
-  - Drag a player token to reposition it.
-  - Click (without dragging) a player token to open a roster list and
-    swap in a different squad player -- this updates the token's number
-    and the name label shown below it.
+How the responsiveness works
+-----------------------------
+- All the *real-world* pitch numbers (105m x 68m, penalty box, etc.) stay as
+  they were -- those are facts about football, not about pixels.
+- Every *pixel* number that used to be a fixed module-level constant
+  (SCALE, SCREEN_W, SCREEN_H, MARGIN_SIDE, TOP_PANEL_H, player radius in
+  px, font sizes) now lives on a single `Layout` object that is recomputed
+  from the current window size:
+      scale = how many px per meter fits in the available space
+      offset_x/offset_y = where the pitch is centered/letterboxed
+  Player positions are stored in meters (x_m, y_m), so when `Layout`
+  changes, every token, line, and button just re-projects to new pixel
+  coordinates automatically -- nothing needs to be rescaled by hand.
+- The pygame window is created with `pygame.RESIZABLE`. On desktop this
+  lets the user drag-resize it; in a pygbag/web build, if the surrounding
+  page dispatches a canvas resize, pygame receives a `VIDEORESIZE` event
+  and we rebuild the layout, fonts, and texture cache to match.
 
-Controls:
+Controls (unchanged):
   - Left click + drag a player token to move it.
   - Left click (no drag) a player token to pick a different squad player.
   - Use the buttons above the pitch to change team / kit / formation.
@@ -31,6 +41,7 @@ from kit_render import build_token_texture
 
 # ---------------------------------------------------------------------------
 # Real-world pitch dimensions (IFAB Laws of the Game, standard size)
+# These never change -- they describe the pitch, not the screen.
 # ---------------------------------------------------------------------------
 PITCH_LENGTH_M = 105.0
 PITCH_WIDTH_M = 68.0
@@ -47,21 +58,27 @@ GOAL_DEPTH_M = 2.0
 
 PLAYER_RADIUS_M = 1.3
 
-# ---------------------------------------------------------------------------
-# Scale + layout
-# ---------------------------------------------------------------------------
-SCALE = 10  # pixels per meter
-MARGIN_SIDE = 50   # px run-off left/right/bottom of the pitch
-TOP_PANEL_H = 132  # px reserved above the pitch for team/kit/formation UI
-
-FIELD_PX_W = int(PITCH_LENGTH_M * SCALE)
-FIELD_PX_H = int(PITCH_WIDTH_M * SCALE)
-
-SCREEN_W = FIELD_PX_W + MARGIN_SIDE * 2
-SCREEN_H = TOP_PANEL_H + FIELD_PX_H + MARGIN_SIDE
-
 FPS = 60
 CLICK_MOVE_THRESHOLD_PX = 6
+
+# ---------------------------------------------------------------------------
+# Responsive layout bounds. Tweak these to taste.
+# ---------------------------------------------------------------------------
+DEFAULT_WINDOW_W = 1300
+DEFAULT_WINDOW_H = 780
+
+MIN_WINDOW_W = 360     # smallest window/canvas we try to support (phones)
+MIN_WINDOW_H = 480
+
+MIN_SCALE = 3.2        # px/m floor -- below this, tokens/text stop shrinking
+MAX_SCALE = 14.0       # px/m ceiling -- stop the pitch getting absurd on 4K/TVs
+
+MARGIN_FRACTION = 0.03      # side margin as a fraction of window width
+TOP_PANEL_FRACTION = 0.16   # top UI panel height as a fraction of window height
+TOP_PANEL_MIN = 96
+TOP_PANEL_MAX = 170
+
+BASE_SCALE_FOR_FONTS = 10.0  # the scale the original fixed layout used to be)
 
 # ---------------------------------------------------------------------------
 # Colors
@@ -80,12 +97,66 @@ COLOR_MODAL_ROW_HOVER = (66, 72, 69)
 COLOR_MODAL_TEXT = (235, 235, 235)
 
 
-def m_to_px(x_m, y_m):
-    return (MARGIN_SIDE + x_m * SCALE, TOP_PANEL_H + y_m * SCALE)
-
-
 def brightness(color):
     return 0.299 * color[0] + 0.587 * color[1] + 0.114 * color[2]
+
+
+# ---------------------------------------------------------------------------
+# Layout: the one place that knows about pixels. Recomputed on resize.
+# ---------------------------------------------------------------------------
+class Layout:
+    def __init__(self, window_w, window_h):
+        self.recompute(window_w, window_h)
+
+    def recompute(self, window_w, window_h):
+        self.window_w = max(int(window_w), MIN_WINDOW_W)
+        self.window_h = max(int(window_h), MIN_WINDOW_H)
+
+        self.top_panel_h = int(
+            max(TOP_PANEL_MIN, min(TOP_PANEL_MAX, self.window_h * TOP_PANEL_FRACTION))
+        )
+        self.margin_side = int(max(16, self.window_w * MARGIN_FRACTION))
+
+        avail_w = self.window_w - 2 * self.margin_side
+        avail_h = self.window_h - self.top_panel_h - self.margin_side
+
+        # Fit the pitch into whatever space is left, without distorting it.
+        scale_w = avail_w / PITCH_LENGTH_M
+        scale_h = avail_h / PITCH_WIDTH_M
+        self.scale = max(MIN_SCALE, min(MAX_SCALE, scale_w, scale_h))
+
+        self.field_px_w = PITCH_LENGTH_M * self.scale
+        self.field_px_h = PITCH_WIDTH_M * self.scale
+
+        # Center the pitch (letterbox) in any extra leftover space.
+        self.offset_x = (self.window_w - self.field_px_w) / 2
+        self.offset_y = self.top_panel_h + (avail_h - self.field_px_h) / 2
+
+    def m_to_px(self, x_m, y_m):
+        return (self.offset_x + x_m * self.scale, self.offset_y + y_m * self.scale)
+
+    def player_radius_px(self):
+        return max(7, int(PLAYER_RADIUS_M * self.scale))
+
+    def font_scale(self):
+        """Relative size multiplier vs. the original fixed-scale design."""
+        return max(0.6, min(1.6, self.scale / BASE_SCALE_FOR_FONTS))
+
+
+# Global layout instance -- replaced (recomputed) on every resize.
+LAYOUT = Layout(DEFAULT_WINDOW_W, DEFAULT_WINDOW_H)
+
+
+def build_fonts(layout):
+    fs = layout.font_scale()
+    return {
+        "number": pygame.font.SysFont("arial", max(10, int(15 * fs)), bold=True),
+        "name": pygame.font.SysFont("arial", max(9, int(12 * fs)), bold=True),
+        "button": pygame.font.SysFont("arial", max(10, int(14 * fs)), bold=True),
+        "modal_title": pygame.font.SysFont("arial", max(12, int(18 * fs)), bold=True),
+        "modal_row": pygame.font.SysFont("arial", max(10, int(14 * fs))),
+        "hint": pygame.font.SysFont("arial", max(9, int(13 * fs))),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -101,50 +172,57 @@ class Player:
         self.position = position
         self.is_gk = position == "GK"
         self.side = side
-        self.radius_px = int(PLAYER_RADIUS_M * SCALE)
+
+    @property
+    def radius_px(self):
+        return LAYOUT.player_radius_px()
 
     @property
     def pos_px(self):
-        return m_to_px(self.x_m, self.y_m)
+        return LAYOUT.m_to_px(self.x_m, self.y_m)
 
     def contains_point(self, px, py):
         cx, cy = self.pos_px
-        return (px - cx) ** 2 + (py - cy) ** 2 <= self.radius_px ** 2
+        r = self.radius_px
+        return (px - cx) ** 2 + (py - cy) ** 2 <= r ** 2
 
     def set_pos_from_px(self, px, py):
-        min_x, min_y = m_to_px(0, 0)
-        max_x, max_y = m_to_px(PITCH_LENGTH_M, PITCH_WIDTH_M)
+        min_x, min_y = LAYOUT.m_to_px(0, 0)
+        max_x, max_y = LAYOUT.m_to_px(PITCH_LENGTH_M, PITCH_WIDTH_M)
         px = max(min_x, min(max_x, px))
         py = max(min_y, min(max_y, py))
-        self.x_m = (px - MARGIN_SIDE) / SCALE
-        self.y_m = (py - TOP_PANEL_H) / SCALE
+        self.x_m = (px - LAYOUT.offset_x) / LAYOUT.scale
+        self.y_m = (py - LAYOUT.offset_y) / LAYOUT.scale
 
     def reset(self):
         self.x_m, self.y_m = self.home_m
 
-    def draw(self, surface, number_font, name_font, texture_cache):
+    def draw(self, surface, fonts, texture_cache):
         kit = self.side.current_kit_for(self)
-        tex_key = (self.side.team["id"], "GK" if self.is_gk else kit["name"])
+        radius_px = self.radius_px
+        # Include radius in the cache key so a resize (different radius)
+        # doesn't reuse a texture sized for the old scale.
+        tex_key = (self.side.team["id"], "GK" if self.is_gk else kit["name"], radius_px)
         tex = texture_cache.get(tex_key)
         if tex is None:
-            tex = build_token_texture(kit["pattern"], kit["colors"], self.radius_px * 2)
+            tex = build_token_texture(kit["pattern"], kit["colors"], radius_px * 2)
             texture_cache[tex_key] = tex
 
         cx, cy = self.pos_px
         cx, cy = int(cx), int(cy)
 
-        shadow = pygame.Surface((self.radius_px * 2 + 8, self.radius_px * 2 + 8), pygame.SRCALPHA)
+        shadow = pygame.Surface((radius_px * 2 + 8, radius_px * 2 + 8), pygame.SRCALPHA)
         pygame.draw.ellipse(shadow, (0, 0, 0, 70), shadow.get_rect())
         surface.blit(shadow, (cx - shadow.get_width() // 2, cy - shadow.get_height() // 2 + 4))
 
-        surface.blit(tex, (cx - self.radius_px, cy - self.radius_px))
+        surface.blit(tex, (cx - radius_px, cy - radius_px))
 
         text_color = (255, 255, 255) if brightness(kit["colors"][0]) < 140 else (25, 25, 25)
-        num_surf = number_font.render(str(self.number), True, text_color)
+        num_surf = fonts["number"].render(str(self.number), True, text_color)
         surface.blit(num_surf, num_surf.get_rect(center=(cx, cy)))
 
-        name_surf = name_font.render(self.name, True, (255, 255, 255))
-        name_rect = name_surf.get_rect(center=(cx, cy + self.radius_px + 11))
+        name_surf = fonts["name"].render(self.name, True, (255, 255, 255))
+        name_rect = name_surf.get_rect(center=(cx, cy + radius_px + 11))
         bg = pygame.Surface((name_rect.width + 8, name_rect.height + 4), pygame.SRCALPHA)
         pygame.draw.rect(bg, (0, 0, 0, 150), bg.get_rect(), border_radius=4)
         surface.blit(bg, (name_rect.x - 4, name_rect.y - 2))
@@ -168,12 +246,6 @@ class TeamSide:
         return mirror_x(x_m) if self.x_dir == -1 else x_m
 
     def formation_position_counts(self, formation_name=None):
-        """Return how many DF/MF/FW players the formation needs.
-
-        Examples:
-          4-4-2     -> 4 DF, 4 MF, 2 FW
-          4-2-3-1   -> 4 DF, 5 MF, 1 FW
-        """
         rows = FORMATIONS[formation_name or self.formation_name]
         return {
             "DF": rows[0],
@@ -182,7 +254,6 @@ class TeamSide:
         }
 
     def players_for_formation(self, formation_name=None):
-        """Pick outfield players by position, matching the selected formation."""
         squad = self.team["squad"]
         counts = self.formation_position_counts(formation_name)
 
@@ -195,8 +266,6 @@ class TeamSide:
                 picked.append(pdata)
                 used_numbers.add(pdata["number"])
 
-        # Fallback: if a squad does not have enough players in one position,
-        # fill the missing places with any unused outfield players.
         needed = 10 - len(picked)
         if needed > 0:
             fallback = [
@@ -243,19 +312,22 @@ class TeamSide:
 
 # ---------------------------------------------------------------------------
 # Simple UI: buttons + modal option lists (no external GUI library needed)
+# All rects below are derived from LAYOUT, so they move/resize automatically.
 # ---------------------------------------------------------------------------
 class Button:
     def __init__(self, rect, text, action):
         self.rect = pygame.Rect(rect)
+        self.base_text = text
         self.text = text
-        self.action = action  # dict describing what to do on click
+        self.action = action
 
     def draw(self, surface, font, mouse_pos):
         hovered = self.rect.collidepoint(mouse_pos)
         pygame.draw.rect(surface, COLOR_BUTTON_HOVER if hovered else COLOR_BUTTON, self.rect, border_radius=6)
         pygame.draw.rect(surface, (90, 96, 92), self.rect, width=1, border_radius=6)
+
+        self.text = self.base_text
         text_surf = font.render(self.text, True, COLOR_BUTTON_TEXT)
-        # Truncate long labels so they don't overflow the button
         max_w = self.rect.width - 12
         if text_surf.get_width() > max_w:
             while self.text and font.size(self.text + "...")[0] > max_w:
@@ -265,14 +337,19 @@ class Button:
 
 
 def build_buttons(side_a, side_b):
-    btn_w, btn_h, gap = 230, 28, 6
+    """Button geometry scales with window width and the layout's margin,
+    so it stays proportionate whether the window is 1300px or 380px wide."""
+    fs = LAYOUT.font_scale()
+    btn_w = max(150, int(min(230, LAYOUT.window_w * 0.34)))
+    btn_h = max(22, int(28 * fs))
+    gap = max(4, int(6 * fs))
     buttons = []
 
-    ax = MARGIN_SIDE
-    bx = SCREEN_W - MARGIN_SIDE - btn_w
-    y0 = 14
+    ax = LAYOUT.margin_side
+    bx = LAYOUT.window_w - LAYOUT.margin_side - btn_w
+    y0 = max(8, int(14 * fs))
 
-    for i, (side, x) in enumerate(((side_a, ax), (side_b, bx))):
+    for side, x in ((side_a, ax), (side_b, bx)):
         buttons.append(Button((x, y0, btn_w, btn_h),
                                f"Team: {side.team['name']}",
                                {"kind": "open_team_modal", "side": side}))
@@ -283,27 +360,29 @@ def build_buttons(side_a, side_b):
                                f"Formation: {side.formation_name}",
                                {"kind": "open_formation_modal", "side": side}))
 
-    reset_w = 150
-    buttons.append(Button((SCREEN_W // 2 - reset_w // 2, y0 + (btn_h + gap) // 2, reset_w, btn_h),
+    reset_w = max(120, int(150 * fs))
+    buttons.append(Button((LAYOUT.window_w // 2 - reset_w // 2, y0 + (btn_h + gap) // 2, reset_w, btn_h),
                            "Reset positions (R)",
                            {"kind": "reset"}))
     return buttons
 
 
 class Modal:
-    """A centered list of clickable options, with a translucent backdrop."""
+    """A centered list of clickable options, with a translucent backdrop.
+    Sized/centered from LAYOUT so it works on small screens too."""
 
     def __init__(self, kind, side, options, player=None):
-        self.kind = kind          # "team" | "kit" | "formation" | "player"
+        self.kind = kind
         self.side = side
-        self.options = options    # list of (label_str, value)
-        self.player = player      # only set for kind == "player"
+        self.options = options
+        self.player = player
 
-        row_h = 30
-        width = 340
-        height = min(560, 60 + row_h * len(options))
+        fs = LAYOUT.font_scale()
+        row_h = max(24, int(30 * fs))
+        width = max(240, min(int(LAYOUT.window_w * 0.85), 340))
+        height = min(int(LAYOUT.window_h * 0.85), 60 + row_h * len(options))
         self.rect = pygame.Rect(0, 0, width, height)
-        self.rect.center = (SCREEN_W // 2, SCREEN_H // 2)
+        self.rect.center = (LAYOUT.window_w // 2, LAYOUT.window_h // 2)
 
         self.row_h = row_h
         self.rows = []
@@ -323,30 +402,29 @@ class Modal:
             "player": "Choose player",
         }[self.kind]
 
-    def draw(self, surface, title_font, row_font, mouse_pos):
-        overlay = pygame.Surface((SCREEN_W, SCREEN_H), pygame.SRCALPHA)
+    def draw(self, surface, fonts, mouse_pos):
+        overlay = pygame.Surface((LAYOUT.window_w, LAYOUT.window_h), pygame.SRCALPHA)
         overlay.fill(COLOR_MODAL_OVERLAY)
         surface.blit(overlay, (0, 0))
 
         pygame.draw.rect(surface, COLOR_MODAL_PANEL, self.rect, border_radius=8)
         pygame.draw.rect(surface, (100, 106, 102), self.rect, width=1, border_radius=8)
 
-        title_surf = title_font.render(self.title(), True, COLOR_MODAL_TEXT)
+        title_surf = fonts["modal_title"].render(self.title(), True, COLOR_MODAL_TEXT)
         surface.blit(title_surf, (self.rect.x + 16, self.rect.y + 14))
 
         pygame.draw.rect(surface, (90, 40, 40), self.close_rect, border_radius=4)
-        x_surf = row_font.render("X", True, (240, 240, 240))
+        x_surf = fonts["modal_row"].render("X", True, (240, 240, 240))
         surface.blit(x_surf, x_surf.get_rect(center=self.close_rect.center))
 
         for row_rect, label, _value in self.rows:
             hovered = row_rect.collidepoint(mouse_pos)
             if hovered:
                 pygame.draw.rect(surface, COLOR_MODAL_ROW_HOVER, row_rect, border_radius=4)
-            label_surf = row_font.render(label, True, COLOR_MODAL_TEXT)
+            label_surf = fonts["modal_row"].render(label, True, COLOR_MODAL_TEXT)
             surface.blit(label_surf, (row_rect.x + 8, row_rect.centery - label_surf.get_height() // 2))
 
     def handle_click(self, pos):
-        """Returns ('select', value) / ('close', None) / (None, None) if click missed everything."""
         if self.close_rect.collidepoint(pos):
             return "close", None
         for row_rect, _label, value in self.rows:
@@ -358,7 +436,6 @@ class Modal:
 
 
 def kit_option_label(kit):
-    swatch = "/".join("#" for _ in kit["colors"])  # placeholder, real swatch drawn separately if desired
     return f"{kit['name']} ({kit['pattern']})"
 
 
@@ -378,8 +455,6 @@ def build_formation_modal(side):
 
 
 def build_player_modal(side, player):
-    # When clicking a token, show players for that token's position first.
-    # Example: clicking a DF in a 4-4-2 shows defenders first.
     same_position = [p for p in side.team["squad"] if p["position"] == player.position]
     other_positions = [p for p in side.team["squad"] if p["position"] != player.position]
 
@@ -393,38 +468,40 @@ def build_player_modal(side, player):
 
 
 # ---------------------------------------------------------------------------
-# Pitch drawing (unchanged geometry, offset now includes the top UI panel)
+# Pitch drawing -- every measurement comes from LAYOUT now.
 # ---------------------------------------------------------------------------
 def draw_pitch(surface):
     surface.fill(COLOR_BG)
 
-    top_panel_rect = pygame.Rect(0, 0, SCREEN_W, TOP_PANEL_H)
+    top_panel_rect = pygame.Rect(0, 0, LAYOUT.window_w, LAYOUT.top_panel_h)
     pygame.draw.rect(surface, COLOR_PANEL_BG, top_panel_rect)
 
-    field_rect = pygame.Rect(*m_to_px(0, 0), FIELD_PX_W, FIELD_PX_H)
+    field_rect = pygame.Rect(*LAYOUT.m_to_px(0, 0), LAYOUT.field_px_w, LAYOUT.field_px_h)
+
+    line_w = max(1, round(3 * LAYOUT.scale / BASE_SCALE_FOR_FONTS))
 
     stripe_count = 12
-    stripe_w = FIELD_PX_W / stripe_count
+    stripe_w = LAYOUT.field_px_w / stripe_count
     for i in range(stripe_count):
         color = COLOR_PITCH if i % 2 == 0 else COLOR_PITCH_ALT
         rect = pygame.Rect(field_rect.x + i * stripe_w, field_rect.y, stripe_w + 1, field_rect.height)
         pygame.draw.rect(surface, color, rect)
 
-    def line(p1_m, p2_m, width=3):
-        pygame.draw.line(surface, COLOR_LINES, m_to_px(*p1_m), m_to_px(*p2_m), width)
+    def line(p1_m, p2_m, width=line_w):
+        pygame.draw.line(surface, COLOR_LINES, LAYOUT.m_to_px(*p1_m), LAYOUT.m_to_px(*p2_m), width)
 
-    def circle(center_m, radius_m, width=3):
-        cx, cy = m_to_px(*center_m)
-        pygame.draw.circle(surface, COLOR_LINES, (int(cx), int(cy)), int(radius_m * SCALE), width)
+    def circle(center_m, radius_m, width=line_w):
+        cx, cy = LAYOUT.m_to_px(*center_m)
+        pygame.draw.circle(surface, COLOR_LINES, (int(cx), int(cy)), int(radius_m * LAYOUT.scale), width)
 
-    def rect_outline(x_m, y_m, w_m, h_m, width=3):
-        x, y = m_to_px(x_m, y_m)
-        pygame.draw.rect(surface, COLOR_LINES, (x, y, w_m * SCALE, h_m * SCALE), width)
+    def rect_outline(x_m, y_m, w_m, h_m, width=line_w):
+        x, y = LAYOUT.m_to_px(x_m, y_m)
+        pygame.draw.rect(surface, COLOR_LINES, (x, y, w_m * LAYOUT.scale, h_m * LAYOUT.scale), width)
 
-    pygame.draw.rect(surface, COLOR_LINES, field_rect, 3)
+    pygame.draw.rect(surface, COLOR_LINES, field_rect, line_w)
     line((PITCH_LENGTH_M / 2, 0), (PITCH_LENGTH_M / 2, PITCH_WIDTH_M))
     circle((PITCH_LENGTH_M / 2, PITCH_WIDTH_M / 2), CENTER_CIRCLE_RADIUS_M)
-    pygame.draw.circle(surface, COLOR_LINES, m_to_px(PITCH_LENGTH_M / 2, PITCH_WIDTH_M / 2), 4)
+    pygame.draw.circle(surface, COLOR_LINES, LAYOUT.m_to_px(PITCH_LENGTH_M / 2, PITCH_WIDTH_M / 2), max(2, line_w + 1))
 
     for x0, direction in ((0, 1), (PITCH_LENGTH_M, -1)):
         pa_w = PENALTY_AREA_DEPTH_M * direction
@@ -436,47 +513,47 @@ def draw_pitch(surface):
         rect_outline(x0 if direction == 1 else x0 + ga_w, ga_y, abs(ga_w), GOAL_AREA_WIDTH_M)
 
         spot_x = x0 + PENALTY_SPOT_DIST_M * direction
-        pygame.draw.circle(surface, COLOR_LINES, m_to_px(spot_x, PITCH_WIDTH_M / 2), 4)
+        pygame.draw.circle(surface, COLOR_LINES, LAYOUT.m_to_px(spot_x, PITCH_WIDTH_M / 2), max(2, line_w + 1))
 
-        arc_rect = pygame.Rect(0, 0, CENTER_CIRCLE_RADIUS_M * 2 * SCALE, CENTER_CIRCLE_RADIUS_M * 2 * SCALE)
-        arc_rect.center = m_to_px(spot_x, PITCH_WIDTH_M / 2)
+        arc_rect = pygame.Rect(0, 0, CENTER_CIRCLE_RADIUS_M * 2 * LAYOUT.scale, CENTER_CIRCLE_RADIUS_M * 2 * LAYOUT.scale)
+        arc_rect.center = LAYOUT.m_to_px(spot_x, PITCH_WIDTH_M / 2)
         if direction == 1:
             start_angle, end_angle = -0.93, 0.93
         else:
             start_angle, end_angle = 3.1416 - 0.93, 3.1416 + 0.93
-        pygame.draw.arc(surface, COLOR_LINES, arc_rect, start_angle, end_angle, 3)
+        pygame.draw.arc(surface, COLOR_LINES, arc_rect, start_angle, end_angle, line_w)
 
         goal_y = (PITCH_WIDTH_M - GOAL_WIDTH_M) / 2
         goal_w = GOAL_DEPTH_M * direction
-        rect_outline(x0 if direction == 1 else x0 + goal_w, goal_y, abs(goal_w), GOAL_WIDTH_M, width=2)
+        rect_outline(x0 if direction == 1 else x0 + goal_w, goal_y, abs(goal_w), GOAL_WIDTH_M, width=max(1, line_w - 1))
 
     for cx_m, cy_m, a_start, a_end in (
-        (0, PITCH_WIDTH_M, 0, 1.5708), #Top.left
-        (0, 0, -1.5708, 0), #Bottom.left
-        (PITCH_LENGTH_M, PITCH_WIDTH_M, 1.5708, 3.1416), #Bottom.right
-        (PITCH_LENGTH_M, 0, 3.1416, 4.7124), #Top.right
+        (0, PITCH_WIDTH_M, 0, 1.5708),
+        (0, 0, -1.5708, 0),
+        (PITCH_LENGTH_M, PITCH_WIDTH_M, 1.5708, 3.1416),
+        (PITCH_LENGTH_M, 0, 3.1416, 4.7124),
     ):
-        r = CORNER_ARC_RADIUS_M * SCALE
+        r = CORNER_ARC_RADIUS_M * LAYOUT.scale
         rect = pygame.Rect(0, 0, r * 2, r * 2)
-        rect.center = m_to_px(cx_m, cy_m)
-        pygame.draw.arc(surface, COLOR_LINES, rect, a_start, a_end, 2)
+        rect.center = LAYOUT.m_to_px(cx_m, cy_m)
+        pygame.draw.arc(surface, COLOR_LINES, rect, a_start, a_end, max(1, line_w - 1))
 
 
 # ---------------------------------------------------------------------------
 # Main app
 # ---------------------------------------------------------------------------
 async def main():
+    global LAYOUT
+
     pygame.init()
     pygame.display.set_caption("Football Tactical Board")
-    screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
-    clock = pygame.time.Clock()
 
-    number_font = pygame.font.SysFont("arial", 15, bold=True)
-    name_font = pygame.font.SysFont("arial", 12, bold=True)
-    button_font = pygame.font.SysFont("arial", 14, bold=True)
-    modal_title_font = pygame.font.SysFont("arial", 18, bold=True)
-    modal_row_font = pygame.font.SysFont("arial", 14)
-    hint_font = pygame.font.SysFont("arial", 13)
+    # RESIZABLE lets the user drag-resize on desktop, and lets a pygbag/web
+    # build react to VIDEORESIZE events if the host page resizes the canvas.
+    screen = pygame.display.set_mode((LAYOUT.window_w, LAYOUT.window_h), pygame.RESIZABLE)
+
+    clock = pygame.time.Clock()
+    fonts = build_fonts(LAYOUT)
 
     side_a = TeamSide("A", TEAMS[0], x_dir=1)
     side_b = TeamSide("B", TEAMS[1], x_dir=-1)
@@ -495,6 +572,20 @@ async def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+            elif event.type == pygame.VIDEORESIZE:
+                LAYOUT.recompute(event.w, event.h)
+                screen = pygame.display.set_mode((LAYOUT.window_w, LAYOUT.window_h), pygame.RESIZABLE)
+                fonts = build_fonts(LAYOUT)
+                texture_cache.clear()  # old textures were sized for the old scale
+                if modal is not None:
+                    # Rebuild the open modal so it re-centers at the new size.
+                    modal = {
+                        "team": build_team_modal,
+                        "kit": build_kit_modal,
+                        "formation": build_formation_modal,
+                    }.get(modal.kind, lambda s: None)(modal.side) if modal.kind != "player" else \
+                        build_player_modal(modal.side, modal.player)
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -560,18 +651,18 @@ async def main():
 
         draw_pitch(screen)
         for p in side_a.players + side_b.players:
-            p.draw(screen, number_font, name_font, texture_cache)
+            p.draw(screen, fonts, texture_cache)
 
         for b in buttons:
-            b.draw(screen, button_font, mouse_pos)
+            b.draw(screen, fonts["button"], mouse_pos)
 
-        hint = hint_font.render(
+        hint = fonts["hint"].render(
             "Drag = move  |  Click = pick player  |  R = reset positions  |  Esc = quit",
             True, (230, 230, 230))
-        screen.blit(hint, (MARGIN_SIDE, SCREEN_H - 22))
+        screen.blit(hint, (LAYOUT.margin_side, LAYOUT.window_h - hint.get_height() - 6))
 
         if modal is not None:
-            modal.draw(screen, modal_title_font, modal_row_font, mouse_pos)
+            modal.draw(screen, fonts, mouse_pos)
 
         pygame.display.flip()
         clock.tick(FPS)

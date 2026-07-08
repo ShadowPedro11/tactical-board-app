@@ -32,9 +32,6 @@ jobs:
       - name: Build web (WASM) version
         run: python -m pygbag --build main.py
 
-      - name: Fix pygbag canvas quality
-        run: python tools/fix_pygbag_html.py
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
