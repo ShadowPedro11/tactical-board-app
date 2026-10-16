@@ -1,6 +1,8 @@
 """Zerozero match parser contracts, using a small representative HTML report."""
 
 import unittest
+from unittest.mock import patch
+from urllib.error import HTTPError, URLError
 
 import match_import
 
@@ -68,6 +70,19 @@ def _report():
 
 
 class MatchImportTests(unittest.TestCase):
+    def test_fetch_reports_upstream_status_and_network_failure(self):
+        failures = (
+            (HTTPError(URL, 403, "Forbidden", None, None), "HTTP 403"),
+            (HTTPError(URL, 503, "Unavailable", None, None), "HTTP 503"),
+            (URLError("network unavailable"), "could not reach Zerozero"),
+        )
+        for failure, expected in failures:
+            with self.subTest(failure=failure), patch.object(match_import, "build_opener") as opener:
+                opener.return_value.open.side_effect = failure
+                with self.assertRaises(match_import.MatchImportError) as caught:
+                    match_import.fetch_match(URL)
+                self.assertIn(expected, str(caught.exception))
+
     def test_url_validation_blocks_other_hosts_and_malformed_links(self):
         self.assertEqual(match_import.validate_match_url(URL + "?utm_source=x"),
                          (URL, 12278041))

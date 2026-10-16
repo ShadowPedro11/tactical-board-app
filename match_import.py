@@ -8,7 +8,9 @@ silently replacing a board with an incomplete team.
 
 from collections import defaultdict
 from html.parser import HTMLParser
+import logging
 import re
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
@@ -21,6 +23,7 @@ _VOID_TAGS = {
     "meta", "param", "source", "track", "wbr",
 }
 _MAX_HTML_BYTES = 2_000_000
+_LOGGER = logging.getLogger(__name__)
 
 
 class MatchImportError(ValueError):
@@ -73,7 +76,16 @@ def fetch_match(url, *, timeout=15):
             declared = response.headers.get_content_charset()
     except MatchImportError:
         raise
+    except HTTPError as exc:
+        _LOGGER.warning("Zerozero returned HTTP %s for match %s", exc.code, canonical)
+        if exc.code in {403, 429}:
+            raise MatchImportError(f"Zerozero refused this server's request (HTTP {exc.code}).") from exc
+        raise MatchImportError(f"Zerozero returned HTTP {exc.code} for this match.") from exc
+    except (URLError, TimeoutError) as exc:
+        _LOGGER.warning("Could not reach Zerozero for match %s: %s", canonical, exc)
+        raise MatchImportError("This server could not reach Zerozero. Try again later.") from exc
     except Exception as exc:
+        _LOGGER.exception("Could not download Zerozero match %s", canonical)
         raise MatchImportError("Could not download the Zerozero match page.") from exc
     markup = raw.decode(declared or "utf-8", errors="replace")
     return parse_match_html(markup, canonical)
