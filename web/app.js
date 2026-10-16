@@ -356,7 +356,7 @@ document.querySelector("#match-form").addEventListener("submit", async event => 
     endpoint.searchParams.set("url", url);
     const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
     if (!response.headers.get("content-type")?.includes("application/json")) {
-      throw new Error("Direct link import needs the local server. Run python tools/serve.py, then open its address.");
+      throw new Error("Link import needs the hosted app or local server. This static site has no match import service.");
     }
     const result = await response.json();
     if (!response.ok) throw new Error(result.error || "Could not import this match");

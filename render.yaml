@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: tactical-board-app
+    runtime: python
+    plan: free
+    buildCommand: python -m compileall -q match_import.py match_board.py tools/serve.py
+    startCommand: python tools/serve.py --host 0.0.0.0
+    healthCheckPath: /

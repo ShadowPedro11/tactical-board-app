@@ -3,8 +3,8 @@
 A responsive football tactics board built with native browser HTML, CSS,
 JavaScript, and SVG. The active app lives in [`web/`](web/). Its pitch, players,
 and annotations are SVG elements; it does not run Pygame or Pygbag. The static
-board deploys to GitHub Pages. A small local Python server provides Zerozero
-match-link imports during local use.
+board deploys to GitHub Pages. A small Python server can host the board and
+provide Zerozero match-link imports locally or on a web service.
 
 ## Features
 
@@ -15,7 +15,7 @@ match-link imports during local use.
 - Seven formations per side: 4-4-2, 4-3-3, 4-1-2-3, 3-5-2, 4-2-3-1,
   5-3-2, and 3-4-3.
 - A player picker for changing the on-field eleven from each club's squad.
-- Import a Zerozero match link through the local server to place both starting
+- Import a Zerozero match link through the Python server to place both starting
   elevens on the board with match uniforms and recorded substitutions.
 - Move players, draw movement arrows, and place or move a ball. Undo the latest
   edit or clear the annotations.
@@ -30,7 +30,7 @@ match-link imports during local use.
 
 ## Run locally
 
-Use Python 3.12 for the local server:
+Use Python 3.12 for the server:
 
 ```bash
 python tools/serve.py
@@ -40,7 +40,8 @@ Open `http://127.0.0.1:8000/`. The server serves [`web/`](web/) and provides
 the same-origin `/api/match` route for Zerozero links. It uses Python's
 standard library and the project's [`match_import.py`](match_import.py) and
 [`match_board.py`](match_board.py), with no package installation. Set a different
-port with `python tools/serve.py --port 8001`.
+port with `python tools/serve.py --port 8001`. For web hosting, the server also
+accepts `PORT` from the environment and `--host 0.0.0.0`.
 
 Node.js 22 or newer is used for browser code checks and tests:
 
@@ -78,7 +79,7 @@ Existing `tactic.json` files can be opened through **Import JSON**.
 
 ### Import a Zerozero match
 
-Start the local server, paste a match link such as
+Open the hosted app or start the local server, then paste a match link such as
 `https://www.zerozero.pt/jogo/2026-10-10-maritimo-fc-porto/12278041` into
 **Import a match**, and select **Import link**. The server downloads the public
 match report and returns both teams, starting players, available formations,
@@ -90,10 +91,10 @@ switch state.
 Link import requires an internet connection and a Zerozero match page with
 complete lineups. GitHub Pages serves only static files and cannot read
 Zerozero's match HTML directly because Zerozero does not allow cross-origin
-browser requests. To use a match on GitHub Pages, import its link while using
-the local server, select **Export JSON**, then use **Import JSON** on the
-published board. Changing the board's rendering engine does not change this
-browser restriction.
+browser requests. The hosted app described below runs the Python importer and
+the browser page at the same origin, so the link import works in the browser.
+To move a tactic to GitHub Pages, select **Export JSON** on the hosted or local
+app, then **Import JSON** on the Pages board.
 
 ### Accessibility and small screens
 
@@ -140,7 +141,8 @@ snapshot rather than a live feed.
 | [`web/state.js`](web/state.js) | Tactic model, validation, formations, and undo |
 | [`web/board-svg.js`](web/board-svg.js) | SVG pitch, uniforms, players, and annotations |
 | [`web/teams.json`](web/teams.json) | Bundled club, kit, and squad snapshot |
-| [`tools/serve.py`](tools/serve.py) | Local static server with a Zerozero match endpoint |
+| [`tools/serve.py`](tools/serve.py) | Static server with a Zerozero match endpoint |
+| [`render.yaml`](render.yaml) | Render web service deployment configuration |
 | [`match_import.py`](match_import.py) | Fetch and parse a Zerozero match report |
 | [`match_board.py`](match_board.py) | Validate and normalize imported match teams |
 | [`scraper.py`](scraper.py) | Optional competition scraper and data generator |
@@ -164,6 +166,26 @@ repository for reference; the active browser app and Pages deployment use
 
 The published URL follows the pattern
 `https://<your-username>.github.io/<repo-name>/`.
+
+GitHub Pages cannot run `/api/match`; link import requires a Python web service.
+
+## Deploy with browser link import
+
+[`render.yaml`](render.yaml) defines a Render web service that serves both the
+board and `/api/match` from the same address. To publish it:
+
+1. Push this repository, including `render.yaml`, to GitHub.
+2. In the Render dashboard, choose **New → Blueprint**, connect the GitHub
+   repository, and deploy the Blueprint. The configuration uses Render's Free
+   web service plan and starts `tools/serve.py` on Render's `PORT`.
+3. Open the service's `https://<service-name>.onrender.com/` address. Paste a
+   Zerozero match URL into **Import a match** and select **Import link**.
+
+Use the Render address as the live board when you want link import. The GitHub
+Pages address continues to serve the static board. Render's Free service may
+take about a minute to wake after 15 minutes without traffic. Match import also
+depends on Zerozero allowing requests from the hosting service; if Zerozero
+changes its page or blocks the host, the app displays an import error.
 
 ## Pitch dimensions
 

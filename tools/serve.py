@@ -1,4 +1,4 @@
-"""Serve the browser board and import Zerozero matches from local Python.
+"""Serve the browser board and import Zerozero matches from Python.
 
 Run ``python tools/serve.py`` and open http://127.0.0.1:8000/.  The browser
 uses this same-origin server for match links because Zerozero does not permit
@@ -9,6 +9,7 @@ import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import mimetypes
+import os
 from pathlib import Path
 import shutil
 import sys
@@ -143,13 +144,15 @@ def create_handler(web_root=WEB_ROOT):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Serve the tactical board locally")
-    parser.add_argument("--port", type=int, default=8000, help="local port (default: 8000)")
+    parser = argparse.ArgumentParser(description="Serve the tactical board")
+    parser.add_argument("--host", default="127.0.0.1", help="listen address (default: 127.0.0.1)")
+    parser.add_argument("--port", type=int, default=os.environ.get("PORT", "8000"),
+                        help="listen port (default: PORT environment variable or 8000)")
     args = parser.parse_args(argv)
     if not 0 <= args.port <= 65535:
         parser.error("port must be between 0 and 65535")
-    server = ThreadingHTTPServer(("127.0.0.1", args.port), create_handler())
-    print(f"Tactical board: http://127.0.0.1:{server.server_port}/", flush=True)
+    server = ThreadingHTTPServer((args.host, args.port), create_handler())
+    print(f"Tactical board: http://{args.host}:{server.server_port}/", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

@@ -1,7 +1,8 @@
-"""HTTP checks for the local, same-origin browser server."""
+"""HTTP checks for the same-origin browser server."""
 
 from http.server import ThreadingHTTPServer
 import json
+import os
 from pathlib import Path
 import tempfile
 import threading
@@ -16,6 +17,15 @@ from tests.test_match_board import sample_match_team
 
 
 MATCH_URL = "https://www.zerozero.pt/jogo/2026-10-10-maritimo-fc-porto/12278041"
+
+
+class ServerStartupTests(unittest.TestCase):
+    def test_hosted_server_uses_host_argument_and_port_environment(self):
+        with patch.dict(os.environ, {"PORT": "10000"}), patch.object(
+                serve, "ThreadingHTTPServer") as server_class:
+            serve.main(["--host", "0.0.0.0"])
+        self.assertEqual(server_class.call_args.args[0], ("0.0.0.0", 10000))
+        server_class.return_value.serve_forever.assert_called_once_with()
 
 
 class LocalServerTests(unittest.TestCase):
