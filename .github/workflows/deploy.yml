@@ -1,45 +1,71 @@
 name: Deploy to GitHub Pages
 
 on:
+  pull_request:
+    branches: ["main"]
   push:
     branches: ["main"]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check browser app syntax
+        run: npm run check
+
+      - name: Run browser app tests
+        run: npm test
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install pygbag
-        run: pip install pygbag
+      - name: Test match importer and local server
+        run: python -m unittest tests.test_match_import tests.test_match_board tests.test_data_and_formations tests.test_serve -v
 
-      - name: Build web (WASM) version
-        run: python -m pygbag --build main.py
+  publish:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload browser app
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: build/web
+          path: web
 
   deploy:
-    needs: build
+    if: github.event_name != 'pull_request'
+    needs: publish
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

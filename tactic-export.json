@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "sides": [
+    {
+      "team_id": "fc_porto",
+      "kit_index": 0,
+      "formation": "4-4-2",
+      "players": [
+        {
+          "number": 14,
+          "name": "Cláudio Ramos",
+          "position": "GK",
+          "x_m": 3.0,
+          "y_m": 34.0
+        },
+        {
+          "number": 20,
+          "name": "Alberto Costa",
+          "position": "DF",
+          "x_m": 14.0,
+          "y_m": 7.0
+        },
+        {
+          "number": 46,
+          "name": "Pedro Lima",
+          "position": "DF",
+          "x_m": 14.0,
+          "y_m": 25.0
+        },
+        {
+          "number": 52,
+          "name": "Martim Fernandes",
+          "position": "DF",
+          "x_m": 14.0,
+          "y_m": 43.0
+        },
+        {
+          "number": 3,
+          "name": "Thiago Silva",
+          "position": "DF",
+          "x_m": 14.0,
+          "y_m": 61.0
+        },
+        {
+          "number": 13,
+          "name": "Pablo Rosario",
+          "position": "MF",
+          "x_m": 31.0,
+          "y_m": 7.0
+        },
+        {
+          "number": 22,
+          "name": "Alan Varela",
+          "position": "MF",
+          "x_m": 31.0,
+          "y_m": 25.0
+        },
+        {
+          "number": 42,
+          "name": "Seko Fofana",
+          "position": "MF",
+          "x_m": 31.0,
+          "y_m": 43.0
+        },
+        {
+          "number": 6,
+          "name": "Stephen Eustáquio",
+          "position": "MF",
+          "x_m": 31.0,
+          "y_m": 61.0
+        },
+        {
+          "number": 7,
+          "name": "William Gomes",
+          "position": "FW",
+          "x_m": 48.0,
+          "y_m": 25.84
+        },
+        {
+          "number": 11,
+          "name": "Pepê",
+          "position": "FW",
+          "x_m": 48.0,
+          "y_m": 42.16
+        }
+      ]
+    },
+    {
+      "team_id": "sporting",
+      "kit_index": 0,
+      "formation": "4-4-2",
+      "players": [
+        {
+          "number": 1,
+          "name": "Rui Silva",
+          "position": "GK",
+          "x_m": 102.0,
+          "y_m": 34.0
+        },
+        {
+          "number": 13,
+          "name": "Georgios Vagiannidis",
+          "position": "DF",
+          "x_m": 91.0,
+          "y_m": 7.0
+        },
+        {
+          "number": 22,
+          "name": "Iván Fresneda",
+          "position": "DF",
+          "x_m": 91.0,
+          "y_m": 25.0
+        },
+        {
+          "number": 47,
+          "name": "Ricardo Esgaio",
+          "position": "DF",
+          "x_m": 91.0,
+          "y_m": 43.0
+        },
+        {
+          "number": 49,
+          "name": "Rômulo Júnior",
+          "position": "DF",
+          "x_m": 91.0,
+          "y_m": 61.0
+        },
+        {
+          "number": 42,
+          "name": "Morten Hjulmand",
+          "position": "MF",
+          "x_m": 72.54434250764525,
+          "y_m": 8.351681957186544
+        },
+        {
+          "number": 60,
+          "name": "Rayan Lucas",
+          "position": "MF",
+          "x_m": 74.0,
+          "y_m": 25.0
+        },
+        {
+          "number": 73,
+          "name": "Eduardo Felicíssimo",
+          "position": "MF",
+          "x_m": 74.0,
+          "y_m": 43.0
+        },
+        {
+          "number": 5,
+          "name": "Hidemasa Morita",
+          "position": "MF",
+          "x_m": 74.0,
+          "y_m": 61.0
+        },
+        {
+          "number": 10,
+          "name": "Geny Catamo",
+          "position": "FW",
+          "x_m": 57.0,
+          "y_m": 25.84
+        },
+        {
+          "number": 17,
+          "name": "Francisco Trincão",
+          "position": "FW",
+          "x_m": 57.0,
+          "y_m": 42.16
+        }
+      ]
+    }
+  ],
+  "arrows": [],
+  "ball": null
+}

@@ -13,6 +13,7 @@ Workflow
 
 Usage
 -----
+    python -m pip install -r requirements-scraper.txt
     python scraper.py scrape "https://www.zerozero.pt/competicao/liga-portuguesa" -o players.csv
     python scraper.py build players.csv -o teams_generated.py
 """

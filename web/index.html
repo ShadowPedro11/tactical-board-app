@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10291d">
+  <title>Football Tactical Board</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Tactical workspace</p>
+        <h1>Football Tactical Board</h1>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite">Loading teams…</p>
+    </header>
+
+    <main>
+      <section class="team-grid" aria-label="Teams">
+        <fieldset class="team-card" data-side="0">
+          <legend>Team A</legend>
+          <div class="team-fields">
+            <label>Club <select id="team-0"></select></label>
+            <label>Uniform <select id="kit-0"></select></label>
+            <label>Formation <select id="formation-0"></select></label>
+          </div>
+        </fieldset>
+        <fieldset class="team-card" data-side="1">
+          <legend>Team B</legend>
+          <div class="team-fields">
+            <label>Club <select id="team-1"></select></label>
+            <label>Uniform <select id="kit-1"></select></label>
+            <label>Formation <select id="formation-1"></select></label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="board-panel" aria-label="Tactical board">
+        <div class="toolbar" role="toolbar" aria-label="Board tools">
+          <div class="mode-group" aria-label="Editing mode">
+            <button type="button" data-mode="move" aria-pressed="true">Move players</button>
+            <button type="button" data-mode="arrow" aria-pressed="false">Draw arrows</button>
+            <button type="button" data-mode="ball" aria-pressed="false">Place ball</button>
+          </div>
+          <div class="action-group">
+            <button type="button" id="undo" title="Ctrl+Z">Undo</button>
+            <button type="button" id="reset" title="R">Reset positions</button>
+            <button type="button" id="clear">Clear annotations</button>
+          </div>
+        </div>
+        <svg id="pitch" width="1150" height="780" viewBox="-5 -5 115 78" xmlns="http://www.w3.org/2000/svg"
+             role="group" aria-label="Football pitch with two draggable teams" tabindex="0"></svg>
+        <p id="board-hint" class="board-hint">Drag a player to move them. Select a player to change them. Use the gold switch badge for a match substitution.</p>
+      </section>
+
+      <div class="lower-grid">
+        <section class="utility-panel" aria-labelledby="files-heading">
+          <h2 id="files-heading">Tactics</h2>
+          <div class="button-grid">
+            <button type="button" id="save" title="Ctrl+S">Save in browser</button>
+            <button type="button" id="load" title="Ctrl+O">Load saved tactic</button>
+            <button type="button" id="import-json">Import JSON</button>
+            <button type="button" id="export-json">Export JSON</button>
+            <button type="button" id="export-png" title="Ctrl+E">Export PNG</button>
+          </div>
+          <input id="json-file" type="file" accept=".json,application/json" hidden>
+        </section>
+
+        <section class="utility-panel" aria-labelledby="match-heading">
+          <h2 id="match-heading">Import a match</h2>
+          <form id="match-form">
+            <label for="match-url">Zerozero match link</label>
+            <div class="inline-form">
+              <input id="match-url" type="url" inputmode="url" autocomplete="url"
+                     placeholder="https://www.zerozero.pt/jogo/…" required>
+              <button type="submit" id="match-submit">Import link</button>
+            </div>
+          </form>
+          <p class="help-text">Direct link import works with the local server. On GitHub Pages, import a JSON tactic exported locally.</p>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="player-dialog" aria-labelledby="player-dialog-title">
+    <form method="dialog" id="player-form">
+      <h2 id="player-dialog-title">Choose a player</h2>
+      <p id="player-dialog-context"></p>
+      <label for="player-choice">Available squad players</label>
+      <select id="player-choice" size="9"></select>
+      <div class="dialog-actions">
+        <button type="button" id="dialog-switch" hidden>Switch player</button>
+        <button type="button" id="dialog-choose">Choose player</button>
+        <button type="submit" value="cancel" class="secondary">Close</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

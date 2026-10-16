@@ -1,2 +1,2 @@
-pygame-ce>=2.5.0
-pygbag>=0.9.1
+# The browser app and local match-import server use no Python packages.
+# Install requirements-scraper.txt only when running the optional scraper.

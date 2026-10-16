@@ -1,0 +1,14 @@
+{
+  "name": "football-tactical-board",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "python tools/serve.py",
+    "check": "node --check web/app.js",
+    "test": "node --test"
+  }
+}
