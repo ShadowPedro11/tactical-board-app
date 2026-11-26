@@ -6,6 +6,26 @@ and annotations are SVG elements; it does not run Pygame or Pygbag. The static
 board deploys to GitHub Pages. A small Python server can host the board and
 provide Zerozero match-link imports locally or on a web service.
 
+## Install the desktop app
+
+Download the package for your computer from [GitHub Releases](https://github.com/ShadowPedro11/tactical-board-app/releases/latest).
+
+| Computer | Download and open |
+| --- | --- |
+| Windows 10 or later, x64 | Run the `x64-Setup.exe` installer. Open **Football Tactical Board** from the Start menu. |
+| macOS 13 or later, Apple silicon | Open the `arm64.dmg` and drag **Football Tactical Board** to Applications. |
+| macOS 13 or later, Intel | Open the `x64.dmg` and drag **Football Tactical Board** to Applications. |
+| Linux, x64 | Make the `.AppImage` executable and run it. If it reports a FUSE error, follow the [AppImage FUSE instructions](https://docs.appimage.org/user-guide/troubleshooting/fuse.html). |
+
+Windows builds are unsigned and macOS builds are not notarized. Windows may
+show a SmartScreen prompt. On macOS, look for **Open Anyway** in
+**System Settings → Privacy & Security** after trying to open the app.
+
+The desktop app includes the board, club data, and match importer. You can use
+the board and save or export tactics offline. Zerozero link imports need an
+internet connection. To move a saved tactic from the browser to the desktop
+app, select **Export JSON** in the browser and **Import JSON** in the app.
+
 ## Features
 
 - A 105 m × 68 m pitch with the usual markings. The display scale adapts to the
@@ -50,9 +70,31 @@ npm run check
 npm test
 ```
 
-The app has no JavaScript package dependencies or bundling step. You can also
+The browser app uses no JavaScript dependencies or bundling step. You can also
 run `npm run dev` to start the local server. Opening `web/index.html` as a
 `file:` URL will not load `teams.json` in some browsers; use the server.
+
+## Build the desktop app and publish updates
+
+Use Node.js 22.12 or newer and Python 3.12. Run the following on the operating
+system and architecture you want to package. The installer is written to `dist/`.
+
+```bash
+npm ci
+python -m pip install -r desktop/requirements.txt
+npm run desktop:backend
+npm run desktop:build
+```
+
+Use `npm run desktop` to open the app during development with Python on your PATH.
+The [Desktop installers workflow](.github/workflows/release.yml) can also be
+run manually from the Actions tab to build downloadable test packages.
+
+To publish an update, run `npm version 1.0.1 --no-git-tag-version` with the new
+version number, then commit and push the changes. Create the matching tag with
+`git tag -a v1.0.1 -m "Football Tactical Board 1.0.1"` and push it with
+`git push origin v1.0.1`. GitHub Actions runs the checks and publishes the
+release when all four packages are ready.
 
 ## Controls
 

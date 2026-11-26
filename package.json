@@ -2,13 +2,22 @@
   "name": "football-tactical-board",
   "version": "1.0.0",
   "private": true,
+  "description": "An interactive football tactics board",
   "type": "module",
+  "main": "desktop/main.js",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
     "dev": "python tools/serve.py",
-    "check": "node --check web/app.js",
-    "test": "node --test"
+    "check": "node --check web/app.js && node --check desktop/main.js",
+    "test": "node --test \"web/*.test.js\"",
+    "desktop": "electron .",
+    "desktop:backend": "python -m PyInstaller --noconfirm --noupx --onedir --name match_backend --paths . --copy-metadata certifi --distpath build/desktop/backend --workpath build/desktop/work --specpath build/desktop desktop/match_backend.py",
+    "desktop:build": "electron-builder --config desktop/electron-builder.yml --publish never"
+  },
+  "devDependencies": {
+    "electron": "45.5.0",
+    "electron-builder": "26.18.0"
   }
 }

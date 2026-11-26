@@ -1,0 +1,180 @@
+name: Desktop installers
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: desktop-release-${{ github.ref }}
+
+jobs:
+  verify:
+    if: github.event_name == 'workflow_dispatch' || !github.event.deleted
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Verify the release version
+        id: version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [[ "$GITHUB_REF_TYPE" == tag && "$GITHUB_REF_NAME" != "v$version" ]]; then
+            echo "::error::Tag $GITHUB_REF_NAME must match package.json version v$version."
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Check the browser app
+        run: |
+          npm ci --ignore-scripts
+          npm run check
+          npm test
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Test the match importer and local server
+        run: python -m unittest tests.test_match_import tests.test_match_board tests.test_data_and_formations tests.test_serve -v
+
+  build:
+    name: Build ${{ matrix.platform }} ${{ matrix.arch }}
+    needs: verify
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: win
+            arch: x64
+            runner: windows-2022
+            suffix: -Setup.exe
+          - platform: mac
+            arch: arm64
+            runner: macos-15
+            suffix: .dmg
+          - platform: mac
+            arch: x64
+            runner: macos-15-intel
+            suffix: .dmg
+          - platform: linux
+            arch: x64
+            artifact_arch: x86_64
+            runner: ubuntu-22.04
+            suffix: .AppImage
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          architecture: ${{ matrix.arch }}
+          cache: npm
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          architecture: ${{ matrix.arch }}
+
+      - name: Install desktop build dependencies
+        run: npm ci
+
+      - name: Install backend build dependencies
+        run: python -m pip install -r desktop/requirements.txt
+
+      - name: Bundle the local backend
+        run: npm run desktop:backend
+
+      - name: Package the desktop app
+        run: npm run desktop:build -- --${{ matrix.platform }} --${{ matrix.arch }}
+
+      - name: Smoke-test the packaged Windows app
+        if: matrix.platform == 'win'
+        run: node tools/smoke_desktop.mjs 'dist/win-unpacked/Football Tactical Board.exe'
+
+      - name: Upload the installer
+        uses: actions/upload-artifact@v6
+        with:
+          name: desktop-${{ matrix.platform }}-${{ matrix.arch }}
+          path: dist/Football-Tactical-Board-${{ needs.verify.outputs.version }}-${{ matrix.artifact_arch || matrix.arch }}${{ matrix.suffix }}
+          if-no-files-found: error
+          compression-level: 0
+          overwrite: true
+
+  publish:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download the installers
+        uses: actions/download-artifact@v7
+        with:
+          pattern: desktop-*
+          path: installers
+          merge-multiple: true
+
+      - name: Publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          shopt -s nullglob
+          installers=(installers/*)
+          if [[ ${#installers[@]} -ne 4 ]]; then
+            echo "::error::Expected all four desktop installers."
+            exit 1
+          fi
+
+          # GitHub CLI can leave a draft if an upload is interrupted.
+          if draft=$(gh release view "$GITHUB_REF_NAME" --json isDraft --jq .isDraft 2>/dev/null); then
+            if [[ "$draft" == true ]]; then
+              gh release upload "$GITHUB_REF_NAME" "${installers[@]}" --clobber
+              gh release edit "$GITHUB_REF_NAME" --draft=false
+            else
+              uploaded=$(gh release view "$GITHUB_REF_NAME" --json assets --jq '.assets[].name')
+              for installer in "${installers[@]}"; do
+                if ! grep -Fxq "${installer##*/}" <<< "$uploaded"; then
+                  echo "::error::The published release is missing ${installer##*/}."
+                  exit 1
+                fi
+              done
+            fi
+            exit 0
+          fi
+
+          notes=$(cat <<'EOF'
+          **Windows (x64)** — Run the `-Setup.exe` installer.
+
+          **macOS** — Open the `arm64.dmg` on Apple silicon or the `x64.dmg` on Intel, then drag the app into Applications.
+
+          **Linux (x64)** — Make the `.AppImage` executable, then open it.
+
+          The board works offline. Importing a Zerozero match link requires an internet connection.
+
+          Windows builds are unsigned and macOS builds are not notarized. See the [installation instructions](https://github.com/ShadowPedro11/tactical-board-app#install-the-desktop-app) for first-launch prompts.
+          EOF
+          )
+          flags=()
+          if [[ "${GITHUB_REF_NAME%%+*}" == *-* ]]; then
+            flags+=(--prerelease)
+          fi
+          gh release create "$GITHUB_REF_NAME" "${installers[@]}" \
+            --verify-tag --title "Football Tactical Board $GITHUB_REF_NAME" \
+            --generate-notes --notes "$notes" "${flags[@]}"

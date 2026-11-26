@@ -21,8 +21,7 @@ WEB_ROOT = PROJECT_ROOT / "web"
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-import match_board  # noqa: E402 - script entry point also needs the project root
-import match_import  # noqa: E402
+from match_api import match_response  # noqa: E402 - script entry point needs the project root
 
 
 def create_handler(web_root=WEB_ROOT):
@@ -83,27 +82,8 @@ def create_handler(web_root=WEB_ROOT):
             if set(fields) != {"url"} or len(fields["url"]) != 1:
                 self._json(400, {"error": "Provide exactly one Zerozero match URL."})
                 return
-            try:
-                canonical, match_id = match_import.validate_match_url(fields["url"][0])
-            except match_import.MatchImportError as exc:
-                self._json(400, {"error": str(exc)})
-                return
-
-            try:
-                match = match_import.load_match(canonical)
-                if (not isinstance(match, dict) or match.get("match_id") != match_id
-                        or not isinstance(match.get("teams"), list)
-                        or [team.get("side") for team in match["teams"]] != ["home", "away"]):
-                    raise ValueError("The match did not contain two complete teams.")
-                teams = [match_board.build_imported_team(team, match_id)
-                         for team in match["teams"]]
-            except match_import.MatchImportError as exc:
-                self._json(502, {"error": str(exc)})
-                return
-            except (KeyError, TypeError, ValueError) as exc:
-                self._json(422, {"error": f"Could not use the match lineup: {exc}"})
-                return
-            self._json(200, {"match_id": match_id, "teams": teams})
+            status, payload = match_response(fields["url"][0])
+            self._json(status, payload)
 
         def _static(self, url_path, *, head_only):
             try:

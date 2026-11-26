@@ -1,0 +1,35 @@
+appId: io.github.shadowpedro11.footballtacticalboard
+productName: Football Tactical Board
+executableName: Football Tactical Board
+
+files:
+  - desktop/main.js
+  - web/**
+  - '!web/**/*.test.js'
+extraResources:
+  - from: build/desktop/backend/match_backend
+    to: match-backend
+  - from: desktop/PYTHON-LICENSE.txt
+    to: match-backend/PYTHON-LICENSE.txt
+
+win:
+  target: nsis
+nsis:
+  artifactName: Football-Tactical-Board-${version}-${arch}-Setup.exe
+  perMachine: false
+
+mac:
+  target: dmg
+  category: public.app-category.sports
+  identity: '-'
+  hardenedRuntime: false
+  notarize: false
+dmg:
+  artifactName: Football-Tactical-Board-${version}-${arch}.dmg
+
+linux:
+  target: AppImage
+  executableName: football-tactical-board
+  category: Sports
+appImage:
+  artifactName: Football-Tactical-Board-${version}-${arch}.AppImage

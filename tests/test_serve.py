@@ -12,8 +12,9 @@ from urllib.error import HTTPError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-from tools import serve
+import match_import
 from tests.test_match_board import sample_match_team
+from tools import serve
 
 
 MATCH_URL = "https://www.zerozero.pt/jogo/2026-10-10-maritimo-fc-porto/12278041"
@@ -80,7 +81,7 @@ class LocalServerTests(unittest.TestCase):
         away["name"] = "Away FC"
         match = {"match_id": 12278041, "teams": [home, away]}
         path = "/api/match?" + urlencode({"url": MATCH_URL})
-        with patch.object(serve.match_import, "load_match", return_value=match) as load:
+        with patch.object(match_import, "load_match", return_value=match) as load:
             status, headers, body = self._get(path)
         self.assertEqual(status, 200)
         self.assertEqual(headers["Cache-Control"], "no-store")
@@ -102,7 +103,7 @@ class LocalServerTests(unittest.TestCase):
             "/api/match?" + urlencode({"url": "https://example.com/jogo/x/1"}),
             "/api/match?" + urlencode({"url": MATCH_URL}) + "&url=" + MATCH_URL,
         ]
-        with patch.object(serve.match_import, "load_match") as load:
+        with patch.object(match_import, "load_match") as load:
             for path in invalid:
                 with self.subTest(path=path):
                     status, payload = self._error(path)
@@ -112,13 +113,13 @@ class LocalServerTests(unittest.TestCase):
 
     def test_match_api_reports_fetch_and_lineup_errors(self):
         path = "/api/match?" + urlencode({"url": MATCH_URL})
-        with patch.object(serve.match_import, "load_match",
-                          side_effect=serve.match_import.MatchImportError("No published lineup.")):
+        with patch.object(match_import, "load_match",
+                          side_effect=match_import.MatchImportError("No published lineup.")):
             status, payload = self._error(path)
         self.assertEqual(status, 502)
         self.assertEqual(payload, {"error": "No published lineup."})
 
-        with patch.object(serve.match_import, "load_match",
+        with patch.object(match_import, "load_match",
                           return_value={"match_id": 12278041, "teams": []}):
             status, payload = self._error(path)
         self.assertEqual(status, 422)
@@ -127,7 +128,7 @@ class LocalServerTests(unittest.TestCase):
     def test_head_does_not_download_match(self):
         request = Request(self.base + "/api/match?" + urlencode({"url": MATCH_URL}),
                           method="HEAD")
-        with patch.object(serve.match_import, "load_match") as load:
+        with patch.object(match_import, "load_match") as load:
             with self.assertRaises(HTTPError) as caught:
                 urlopen(request, timeout=3)
         self.assertEqual(caught.exception.code, 405)
